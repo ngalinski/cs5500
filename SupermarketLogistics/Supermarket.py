@@ -3,8 +3,18 @@ import random
 import csv
 import statistics
 import scipy.stats
+import math
+import datetime
+import holidays
 import matplotlib.pyplot as plt
 import numpy as np
+
+# Holidays (I went off public holidays)
+HOLIDAYS = [[1,1], [1,20], [2,14], [5,25], [7,4], [9,7], [11,11], [11,26], [12,25]]
+
+# Holidays: Holidays increase traffic.
+# Week before, day before, day of
+HOLIDAY_MULT = [1.15, 1.40, 0.2]
 
 # Days
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -31,10 +41,6 @@ AVG_SHOPPER_TIME = [[6, 25], [25, 75]]
 # Seniors: Seniors take more time, randgen inside interval
 # Average number of senior in US is 16%
 SENIOR_TIME = [45, 60]
-
-# Holidays: Holidays increase traffic.
-# Week before, day before, day of
-HOLIDAY = [1.15, 1.40, 0.2]
 
 random.seed(1)
 
@@ -171,49 +177,83 @@ def generateShopper(dayNum, weather, isTuesday):
     return shopper
 
 
+# Date must be in datetime form
+# date(yyyy, mm, dd)
+def holidayMultiplier(date):
+
+    us_holidays = holidays.US()
+
+    # Today is holiday
+    if date in us_holidays:
+        return HOLIDAY_MULT[2]
+
+    # Tomorrow is holiday
+    elif date + datetime.timedelta(days=1) in us_holidays:
+        return HOLIDAY_MULT[1]
+
+    # Holiday in next week
+    elif any(date + datetime.timedelta(days=i) in us_holidays for i in range(7)):
+        return HOLIDAY_MULT[0]
+
+    # Regular day
+    else:
+        return 1
+
+
+def writeData(date, dayNice):
+
+    day = date.weekday()
+
+    with open(DAYS[day] + ".csv", "w", newline='') as dayFile:
+        writer = csv.writer(dayFile, delimiter=',')
+        writer.writerow(["Time Entered (hr)", "Time Spent (min)", "Rushing", "Senior", "Nice Day: " + str(dayNice)])
+
+        numShoppers = AVERAGE_SHOPPERS[day] * holidayMultiplier(date)
+
+        if dayNice and day > 5:
+            numShopers = numShoppers * 1.4
+
+        for i in range(numShoppers):
+            shopper = generateShopper(day, dayNice, day == 1)
+            processing = shopper.writing()
+            processing.append(str(dayNice))
+            writer.writerow(processing)
+
+
+def readData(date):
+
+    # This is a reader function that shows mean and std of time spent
+    # Divides data based on category of lunch / dinner / senior / other
+    # Other is normal shopping, should have highest deviation
+    # Times on weekends should be longer
+    day = date.weekday()
+
+    with open(DAYS[day] + ".csv", "r", newline='') as dayFileReader:
+        reader = csv.reader(dayFileReader)
+        next(reader)
+        helper = ["Lunch", "Dinner", "Senior", "Other"]
+        times = [[], [], [], []]
+        for row in reader:
+            timeSpent = float(row[1])
+            rush = row[2]
+            senior = row[3]
+            if rush == 'Lunch':
+                times[0].append(timeSpent)
+            elif rush == 'Dinner':
+                times[1].append(timeSpent)
+            elif senior == 'True':
+                times[2].append(timeSpent)
+            else:
+                times[3].append(timeSpent)
+
+        print(DAYS[day] + ":")
+        for timeArrays in times:
+            if len(timeArrays) != 0:
+                print(helper[times.index(timeArrays)], end=' ')
+                print("mean: " + str(round(statistics.mean(timeArrays), 3)), "std: " + str(round(statistics.stdev(timeArrays), 3)))
+
+
 if __name__ == '__main__':
 
-    for day in range(len(DAYS)):
-
-        dayNice = random.random() < 0.55
-
-        with open(DAYS[day] + ".csv", "w", newline='') as dayFile:
-            writer = csv.writer(dayFile, delimiter=',')
-            writer.writerow(["Time Entered (hr)", "Time Spent (min)", "Rushing", "Senior", "Nice Day: " + str(dayNice)])
-
-            if dayNice and day > 5:
-                AVERAGE_SHOPPERS[day] = AVERAGE_SHOPPERS[day] * 1.4
-
-            for numShoppers in range(AVERAGE_SHOPPERS[day]):
-                shopper = generateShopper(day, dayNice, day == 1)
-                processing = shopper.writing()
-                processing.append(str(dayNice))
-                writer.writerow(processing)
-
-        # This is a reader function that shows mean and std of time spent
-        # Divides data based on category of lunch / dinner / senior / other
-        # Other is normal shopping, should have highest deviation
-        # Times on weekends should be longer
-        with open(DAYS[day] + ".csv", "r", newline='') as dayFileReader:
-            reader = csv.reader(dayFileReader)
-            next(reader)
-            helper = ["Lunch", "Dinner", "Senior", "Other"]
-            times = [[], [], [], []]
-            for row in reader:
-                timeSpent = float(row[1])
-                rush = row[2]
-                senior = row[3]
-                if rush == 'Lunch':
-                    times[0].append(timeSpent)
-                elif rush == 'Dinner':
-                    times[1].append(timeSpent)
-                elif senior == 'True':
-                    times[2].append(timeSpent)
-                else:
-                    times[3].append(timeSpent)
-
-            print(DAYS[day] + ":")
-            for timeArrays in times:
-                if len(timeArrays) != 0:
-                    print(helper[times.index(timeArrays)], end=' ')
-                    print("mean: " + str(round(statistics.mean(timeArrays), 3)), "std: " + str(round(statistics.stdev(timeArrays), 3)))
+    writeData(datetime.date.today(), False)
+    readData(datetime.date.today())
