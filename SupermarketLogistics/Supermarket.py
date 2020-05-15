@@ -161,10 +161,13 @@ def generateShopper(dayNum, weather, isTuesday):
     seconds = ((timeSpent * 60) % 60)
     shopper.setTimeSpent(min + seconds)
     """
+    shopper.setTimeSpent(round(timeSpent, 2))
+    shopper.setTimeEntered(round(timeEntered, 2))
+
     if timeEntered + (timeSpent / 60) > 15:
         timeSpent = 15 - timeEntered
-    shopper.setTimeEntered(round(timeEntered, 2))
-    shopper.setTimeSpent(round(timeSpent * 60, 2))
+        shopper.setTimeSpent(round(timeSpent * 60, 2))
+
     return shopper
 
 
