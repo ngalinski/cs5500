@@ -211,9 +211,9 @@ def writeData(date, dayNice):
         numShoppers = AVERAGE_SHOPPERS[day] * holidayMultiplier(date)
 
         if dayNice and day > 5:
-            numShopers = numShoppers * 1.4
+            numShoppers = numShoppers * 1.4
 
-        for i in range(numShoppers):
+        for i in range(round(numShoppers)):
             shopper = generateShopper(day, dayNice, day == 1)
             processing = shopper.writing()
             processing.append(str(dayNice))
@@ -257,3 +257,7 @@ if __name__ == '__main__':
 
     writeData(datetime.date.today(), False)
     readData(datetime.date.today())
+
+    writeData(datetime.date(2019, 1, 1), False)
+    writeData(datetime.date(2018, 12, 31), False)
+    writeData(datetime.date(2018, 12, 20), False)
