@@ -190,12 +190,15 @@ if __name__ == '__main__':
                 processing.append(str(dayNice))
                 writer.writerow(processing)
 
+        # This is a reader function that shows mean and std of time spent
+        # Divides data based on category of lunch / dinner / senior / other
+        # Other is normal shopping, should have highest deviation
+        # Times on weekends should be longer
         with open(DAYS[day] + ".csv", "r", newline='') as dayFileReader:
             reader = csv.reader(dayFileReader)
             next(reader)
             helper = ["Lunch", "Dinner", "Senior", "Other"]
             times = [[], [], [], []]
-            print(next(reader))
             for row in reader:
                 timeSpent = float(row[1])
                 rush = row[2]
