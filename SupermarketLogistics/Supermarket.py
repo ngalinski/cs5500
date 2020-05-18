@@ -9,6 +9,9 @@ import holidays
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Store hours
+STORE_HOURS = [0, 15]
+
 # Holidays (I went off public holidays)
 HOLIDAYS = [[1,1], [1,20], [2,14], [5,25], [7,4], [9,7], [11,11], [11,26], [12,25]]
 
@@ -26,33 +29,49 @@ AVERAGE_SHOPPERS = [800, 1000, 1200, 900, 2500, 4000, 5000]
 # Weekdays: Let's just use this as our splits
 # 6 - 12, 12 - 1, 1 - 5, 5 - 6:30, 6:30 - 9
 # I used even splits but we can edit this here instead of making it more complicated
-WEEKDAY_TIMES = [0.20, 0.20, 0.20, 0.20, 0.20]
+WEEKDAY_CHANCES = [0.20, 0.20, 0.20, 0.20, 0.20]
+WEEKDAY_TIMES = [[0, 6], [6, 7], [7, 11], [11, 12.5], [12.5, 15]]
 
 # Percentage of shoppers entering at lunch/dinner that are rushing
 RUSH = 0.75
 
+# Lunch rush time
+LUNCH_RUSH = [6, 14]
+
+# Dinner rush time
+DINNER_RUSH = [16, 24]
+
 # Weekends: If weather nice, multiply average shopper by constant below
 # I think nice days are common, so I'm saying 55% chance of having a nice day
-WEEKEND_WEATHER_NICE = 1.4
+WEEKEND_WEATHER_NICE_MULT = 1.4
+
+# Weekend time spent
+WEEKEND_TIME = [50, 70]
 
 # Shopper time: Shopper time, 50% chance each interval, randgen inside interval
 AVG_SHOPPER_TIME = [[6, 25], [25, 75]]
 
 # Seniors: Seniors take more time, randgen inside interval
 # Average number of senior in US is 16%
-SENIOR_TIME = [45, 60]
+SENIOR_TIME_SPENT = [45, 60]
 
 # Senior chance of going between 10-12 on tuesday
-SENIOR_DISCOUNT = 0.60
+SENIOR_DISCOUNT_CHANCE = 0.60
+
+# Senior discount time
+SENIOR_DISCOUNT_TIME = [4, 6]
+
+# Seniors will not be going into a store past 6pm
+SENIOR_ENTER_TIME = [0, 12]
 
 # We will be using a normal distribution for the time spent shopping for normal customers
 # We will be using 68 - 95 - 99.7 with max and min being 3 sd away from mean
 def timeSpentNormal():
 
     if random.random() < 0.5:
-        return random.uniform(6, 25)
+        return random.uniform(AVG_SHOPPER_TIME[0][0], AVG_SHOPPER_TIME[0][1])
     else:
-        return random.uniform(25, 75)
+        return random.uniform(AVG_SHOPPER_TIME[1][0], AVG_SHOPPER_TIME[1][1])
 
     """
     mean = 25
@@ -95,8 +114,8 @@ def generateShopper(dayNum, weather, isTuesday):
     if dayNum == 1 and shopper.getSenior():
 
         # Senior entering during discount
-        if random.random() < SENIOR_DISCOUNT:
-            timeEntered = random.uniform(4, 6)
+        if random.random() < SENIOR_DISCOUNT_CHANCE:
+            timeEntered = random.uniform(SENIOR_DISCOUNT_TIME[0], SENIOR_DISCOUNT_TIME[1])
 
         # Senior entering not during discount
         else:
@@ -107,7 +126,7 @@ def generateShopper(dayNum, weather, isTuesday):
                 timeEntered += 2
 
         shopper.setRush("Senior")
-        timeSpent = random.uniform(45, 60)
+        timeSpent = random.uniform(SENIOR_TIME_SPENT[0], SENIOR_TIME_SPENT[1])
 
     # 0-5 Week 6-7 Weekend
     # Cover weekdays
@@ -117,46 +136,46 @@ def generateShopper(dayNum, weather, isTuesday):
         # Assume seniors come in at all times for regular shopping
         # From experience seniors don't go out past dinner, so let's say 6pm
         if shopper.getSenior():
-            timeSpent = random.uniform(45, 60)
-            timeEntered = random.uniform(0, 12)
+            timeSpent = random.uniform(SENIOR_TIME_SPENT[0], SENIOR_TIME_SPENT[1])
+            timeEntered = random.uniform(SENIOR_ENTER_TIME[0], SENIOR_ENTER_TIME[1])
             shopper.setRush("Senior")
 
         else:
             timeEnteredRandom = random.random()
 
             # 6 - 12
-            if timeEnteredRandom < WEEKDAY_TIMES[0]:
-                timeEntered = random.uniform(0, 6)
+            if timeEnteredRandom < WEEKDAY_CHANCES[0]:
+                timeEntered = random.uniform(WEEKDAY_TIMES[0][0], WEEKDAY_TIMES[0][1])
                 timeSpent = timeSpentNormal()
 
             # 12 - 1
             # Lunch rush condition
-            elif timeEnteredRandom < WEEKDAY_TIMES[0] + WEEKDAY_TIMES[1]:
-                timeEntered = random.uniform(6, 7)
-                if random.random() > 0.75:
+            elif timeEnteredRandom < WEEKDAY_CHANCES[0] + WEEKDAY_CHANCES[1]:
+                timeEntered = random.uniform(WEEKDAY_TIMES[1][0], WEEKDAY_TIMES[1][1])
+                if random.random() > RUSH:
                     timeSpent = timeSpentNormal()
                 else:
-                    timeSpent = random.uniform(6, 14)
+                    timeSpent = random.uniform(LUNCH_RUSH[0], LUNCH_RUSH[1])
                     shopper.setRush("Lunch")
 
             # 1 - 5
-            elif timeEnteredRandom < WEEKDAY_TIMES[0] + WEEKDAY_TIMES[1] + WEEKDAY_TIMES[2]:
-                timeEntered = random.uniform(7, 11)
+            elif timeEnteredRandom < WEEKDAY_CHANCES[0] + WEEKDAY_CHANCES[1] + WEEKDAY_CHANCES[2]:
+                timeEntered = random.uniform(WEEKDAY_TIMES[2][0], WEEKDAY_TIMES[2][1])
                 timeSpent = timeSpentNormal()
 
             # 5 - 6:30
             # Dinner rush condition
-            elif timeEnteredRandom < WEEKDAY_TIMES[0] + WEEKDAY_TIMES[1] + WEEKDAY_TIMES[2] + WEEKDAY_TIMES[3]:
-                timeEntered = random.uniform(11, 12.5)
-                if random.random() > 0.75:
+            elif timeEnteredRandom < WEEKDAY_CHANCES[0] + WEEKDAY_CHANCES[1] + WEEKDAY_CHANCES[2] + WEEKDAY_CHANCES[3]:
+                timeEntered = random.uniform(WEEKDAY_TIMES[3][0], WEEKDAY_TIMES[3][1])
+                if random.random() > RUSH:
                     timeSpent = timeSpentNormal()
                 else:
-                    timeSpent = random.uniform(16, 24)
+                    timeSpent = random.uniform(DINNER_RUSH[0], DINNER_RUSH[1])
                     shopper.setRush("Dinner")
 
             # 6:30 - 9
             else:
-                timeEntered = random.uniform(12.5, 15)
+                timeEntered = random.uniform(WEEKDAY_TIMES[4][0], WEEKDAY_TIMES[4][1])
                 timeSpent = timeSpentNormal()
 
     # Cover weekends
@@ -164,21 +183,22 @@ def generateShopper(dayNum, weather, isTuesday):
         shopper.setRush("Weekend")
         # Cover elder
         if shopper.getSenior():
-            timeSpent = random.uniform(45, 60)
-            timeEntered = random.uniform(0, 12)
+            timeSpent = random.uniform(SENIOR_TIME_SPENT[0], SENIOR_TIME_SPENT[1])
+            timeEntered = random.uniform(SENIOR_ENTER_TIME[0], SENIOR_ENTER_TIME[1])
             shopper.setRush("Senior")
 
+        # TODO: Implement something that handles the extra 40% (waiting on response from instructor)
         # Cover nice weather
         elif weather:
             # Used short time definition as dinner rusher
-            timeSpent = random.uniform(17, 23)
-            timeEntered = random.uniform(0, 15)
+            timeSpent = random.uniform(DINNER_RUSH[0], DINNER_RUSH[1])
+            timeEntered = random.uniform(STORE_HOURS[0], STORE_HOURS[1])
 
         # Cover all others
         else:
             # Weekend averages to 60 min
-            timeSpent = random.uniform(50, 70)
-            timeEntered = random.uniform(0, 15)
+            timeSpent = random.uniform(WEEKEND_TIME[0], WEEKEND_TIME[1])
+            timeEntered = random.uniform(STORE_HOURS[0], STORE_HOURS[1])
 
     """
     min = int(timeSpent)
@@ -187,14 +207,14 @@ def generateShopper(dayNum, weather, isTuesday):
     """
 
     # Handling case for customers who like to enter close to closing
-    if int(round(timeEntered, 2)) == 15:
+    if int(round(timeEntered, 2)) == STORE_HOURS[1]:
         timeEntered = 14.99
 
     shopper.setTimeSpent(round(timeSpent, 2))
     shopper.setTimeEntered(round(timeEntered, 2))
 
-    if timeEntered + (timeSpent / 60) > 15:
-        timeSpent = 15 - timeEntered
+    if timeEntered + (timeSpent / 60) > STORE_HOURS[1]:
+        timeSpent = STORE_HOURS[1] - timeEntered
         shopper.setTimeSpent(round(timeSpent * 60, 2))
 
     return shopper
@@ -234,7 +254,7 @@ def writeData(date, dayNice):
         numShoppers = AVERAGE_SHOPPERS[day] * holidayMultiplier(date)
 
         if dayNice and day > 5:
-            numShoppers = numShoppers * 1.4
+            numShoppers = numShoppers * WEEKEND_WEATHER_NICE_MULT
 
         for i in range(round(numShoppers)):
             shopper = generateShopper(day, dayNice, day == 1)
@@ -297,26 +317,15 @@ def readData(date):
         for rushArray in rushTimes:
             if len(rushArray) != 0:
                 print(helper[rushTimes.index(rushArray)], end=' ')
-                print("mean: " + str(round(statistics.mean(rushArray), 3)), "std: " + str(round(statistics.stdev(rushArray), 3)))
+                print("time spent in store: mean: " + str(round(statistics.mean(rushArray), 3)), "std: " + str(round(statistics.stdev(rushArray), 3)))
 
 
 if __name__ == '__main__':
 
-    print(round(14.81534121, 2))
-    print(int(round(14.999999, 2)))
-
-    timeEntered = 15.0
-    timeSpent = 12
-
-    if int(timeEntered) == 15:
-        timeEntered = 14.90
-
-    if timeEntered + (timeSpent / 60) > 15:
-        timeSpent = 15 - timeEntered
-        print(round(timeSpent * 60, 2))
+    user_month = input("Please enter a month (1 - 12)")
+    user_day = input("Please enter a day (1 - 28/29/30/31)")
+    user_year = input("Please enter a year")
+    user_weather = input("Is the weather nice? (yes / no)")
+    writeData(datetime.date(int(user_year), int(user_month), int(user_day)), user_weather == "yes")
 
     writeData(datetime.date.today(), False)
-
-    writeData(datetime.date(2019, 1, 1), False)
-    writeData(datetime.date(2018, 12, 31), False)
-    writeData(datetime.date(2018, 12, 20), False)
