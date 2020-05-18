@@ -2,19 +2,26 @@
 
 import random
 
+SENIOR_CHANCE = 0.16
+SENIOR_CHANCE_TUESDAY = 0.40
+
+
+# More seniors at 10 - 12 on Tuesday
+# Higher chance of being a senior on tuesday at 10-12
 class Shopper(object):
 
     def __init__(self, isTuesday):
-
         self.isTuesday = isTuesday
-        self.isSenior = self.ifSenior()
+        self.isSenior = self.senior()
         self.timeSpent = 0
         self.rush = "Normal"
         self.timeEntered = 0
 
-    def ifSenior(self):
-        ifSenior = random.random()
-        return ifSenior < 0.16
+    def senior(self):
+        if self.isTuesday:
+            return random.random() < SENIOR_CHANCE_TUESDAY
+        else:
+            return random.random() < SENIOR_CHANCE
 
     def getSenior(self):
         return self.isSenior

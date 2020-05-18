@@ -42,8 +42,8 @@ AVG_SHOPPER_TIME = [[6, 25], [25, 75]]
 # Average number of senior in US is 16%
 SENIOR_TIME = [45, 60]
 
-random.seed(1)
-
+# Senior chance of going between 10-12 on tuesday
+SENIOR_DISCOUNT = 0.60
 
 # We will be using a normal distribution for the time spent shopping for normal customers
 # We will be using 68 - 95 - 99.7 with max and min being 3 sd away from mean
@@ -91,9 +91,27 @@ def my_distribution(min_val, max_val, mean, std):
 def generateShopper(dayNum, weather, isTuesday):
     shopper = Shopper(isTuesday)
 
+    # Senior Tuesdays
+    if dayNum == 1 and shopper.getSenior():
+
+        # Senior entering during discount
+        if random.random() < SENIOR_DISCOUNT:
+            timeEntered = random.uniform(4, 6)
+
+        # Senior entering not during discount
+        else:
+            timeEntered = random.uniform(0, 10)
+
+            # Push shopper outside of discount time
+            if timeEntered > 4:
+                timeEntered += 2
+
+        shopper.setRush("Senior")
+        timeSpent = random.uniform(45, 60)
+
     # 0-5 Week 6-7 Weekend
     # Cover weekdays
-    if dayNum < 6:
+    elif dayNum < 6:
 
         # Cover senior
         # Assume seniors come in at all times for regular shopping
@@ -138,7 +156,7 @@ def generateShopper(dayNum, weather, isTuesday):
 
             # 6:30 - 9
             else:
-                timeEntered = random.uniform(12.5, 14)
+                timeEntered = random.uniform(12.5, 15)
                 timeSpent = timeSpentNormal()
 
     # Cover weekends
@@ -167,6 +185,11 @@ def generateShopper(dayNum, weather, isTuesday):
     seconds = ((timeSpent * 60) % 60)
     shopper.setTimeSpent(min + seconds)
     """
+
+    # Handling case for customers who like to enter close to closing
+    if int(round(timeEntered, 2)) == 15:
+        timeEntered = 14.99
+
     shopper.setTimeSpent(round(timeSpent, 2))
     shopper.setTimeEntered(round(timeEntered, 2))
 
@@ -219,6 +242,8 @@ def writeData(date, dayNice):
             processing.append(str(dayNice))
             writer.writerow(processing)
 
+    readData(date)
+
 
 def readData(date):
 
@@ -232,31 +257,65 @@ def readData(date):
         reader = csv.reader(dayFileReader)
         next(reader)
         helper = ["Lunch", "Dinner", "Senior", "Other"]
-        times = [[], [], [], []]
+        rushTimes = [[], [], [], []]
+        newCustomers = np.zeros(16)
+        customersInStore = np.zeros(16)
         for row in reader:
+
+            # Count number people enter store per hour
+            timeEntered = float(row[0])
             timeSpent = float(row[1])
+
+            if int(timeEntered) == 15:
+                print(row)
+
+            newCustomers[int(timeEntered)] += 1
+
+            # Count number people in store per hour
+            for i in range(int(timeEntered), int(timeEntered + (timeSpent / 60)) + 1):
+                customersInStore[i] += 1
+
+            # Count rush times
             rush = row[2]
             senior = row[3]
             if rush == 'Lunch':
-                times[0].append(timeSpent)
+                rushTimes[0].append(timeSpent)
             elif rush == 'Dinner':
-                times[1].append(timeSpent)
+                rushTimes[1].append(timeSpent)
             elif senior == 'True':
-                times[2].append(timeSpent)
+                rushTimes[2].append(timeSpent)
             else:
-                times[3].append(timeSpent)
+                rushTimes[3].append(timeSpent)
 
         print(DAYS[day] + ":")
-        for timeArrays in times:
-            if len(timeArrays) != 0:
-                print(helper[times.index(timeArrays)], end=' ')
-                print("mean: " + str(round(statistics.mean(timeArrays), 3)), "std: " + str(round(statistics.stdev(timeArrays), 3)))
+        print("New customers per hour: ", end="")
+        print(newCustomers)
+        print("Customers in store per hour: ", end="")
+        print(customersInStore)
+        print("Customers total:", np.sum(newCustomers), "lunch:", len(rushTimes[0]), "dinner:", len(rushTimes[1]), "seniors:", len(rushTimes[2]))
+        print("There will be", customersInStore[-1], "customers at closing time.")
+        for rushArray in rushTimes:
+            if len(rushArray) != 0:
+                print(helper[rushTimes.index(rushArray)], end=' ')
+                print("mean: " + str(round(statistics.mean(rushArray), 3)), "std: " + str(round(statistics.stdev(rushArray), 3)))
 
 
 if __name__ == '__main__':
 
+    print(round(14.81534121, 2))
+    print(int(round(14.999999, 2)))
+
+    timeEntered = 15.0
+    timeSpent = 12
+
+    if int(timeEntered) == 15:
+        timeEntered = 14.90
+
+    if timeEntered + (timeSpent / 60) > 15:
+        timeSpent = 15 - timeEntered
+        print(round(timeSpent * 60, 2))
+
     writeData(datetime.date.today(), False)
-    readData(datetime.date.today())
 
     writeData(datetime.date(2019, 1, 1), False)
     writeData(datetime.date(2018, 12, 31), False)
