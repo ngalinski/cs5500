@@ -270,12 +270,13 @@ def write_data(date, day_nice):
     """
     Function that writes the shoppers in a date to a csv file. \n
     :param date: datetime date
-    :param dayNice: whether the day is nice
+    :param day_nice: whether the day is nice
     :return: nothing
     """
 
     day = date.weekday()
-    with open(DAYS[day] + ".csv", "w", newline='') as day_file_writer:
+    date_time_string = date.strftime("%m.%d.%Y")
+    with open(date_time_string + ".csv", mode="w", newline='') as day_file_writer:
         writer = csv.writer(day_file_writer, delimiter=',')
         writer.writerow(["Time Entered (hr)", "Time Spent (min)",
                          "Rushing", "Senior", "Nice Day: " + str(day_nice)])
@@ -306,14 +307,14 @@ def read_data(date):
     # Other is normal shopping, should have highest deviation
     # Times on weekends should be longer
     day = date.weekday()
-
-    with open(DAYS[day] + ".csv", "r", newline='') as day_file_reader:
+    date_time_string = date.strftime("%m.%d.%Y")
+    with open(date_time_string + ".csv", mode="r", newline='') as day_file_reader:
         reader = csv.reader(day_file_reader)
         next(reader)
         helper = ["Lunch", "Dinner", "Senior", "Other"]
         rush_times = [[], [], [], []]
-        new_customers = np.zeros(16)
-        customers_in_store = np.zeros(16)
+        new_customers = np.zeros(16, dtype=int)
+        customers_in_store = np.zeros(16, dtype=int)
         for row in reader:
 
             # Count number people enter store per hour
@@ -341,19 +342,27 @@ def read_data(date):
             else:
                 rush_times[3].append(time_spent)
 
-        print(DAYS[day] + ":")
-        print("New customers per hour: ", end="")
-        print(new_customers)
-        print("Customers in store per hour: ", end="")
-        print(customers_in_store)
-        print("Customers total:", np.sum(new_customers), "lunch:", len(rush_times[0]),
-              "dinner:", len(rush_times[1]), "seniors:", len(rush_times[2]))
-        print("There will be", customers_in_store[-1], "customers at closing time.")
+        statistics_file = open(date_time_string + "_statistics.csv", mode="w")
+        csv.writer(statistics_file, delimiter=',')
+        statistics_file.write(date_time_string + " Statistics\n")
+        statistics_file.write(",6 to 7,7 to 8,8 to 9,9 to 10,10 to 11,"
+                              "11 to 12,12 to 1,1 to 2,2 to 3,3 to 4,"
+                              "4 to 5,5 to 6,6 to 7,7 to 8,8 to 9,Closing\n")
+        statistics_file.write("New customers per hour: ,")
+        statistics_file.write(",".join(repr(e) for e in new_customers))
+        statistics_file.write("\nCustomers in store per hour: ,")
+        statistics_file.write(",".join(repr(e) for e in customers_in_store))
+        statistics_file.write("\nTotal customers: ," + str(np.sum(new_customers)))
+        statistics_file.write("\nLunch: ," + str(len(rush_times[0])))
+        statistics_file.write("\nDinner: ," + str(len(rush_times[1])))
+        statistics_file.write("\nSeniors: ," + str(len(rush_times[2])))
+        statistics_file.write("\nCustomers in store at closing: ," + str(int(customers_in_store[-1])))
         for rush_array in rush_times:
             if len(rush_array) != 0:
-                print(helper[rush_times.index(rush_array)], end=' ')
-                print("time spent in store: mean: " + str(round(statistics.mean(rush_array), 3)),
-                      "std: " + str(round(statistics.stdev(rush_array), 3)))
+                statistics_file.write("\n" + helper[rush_times.index(rush_array)])
+                statistics_file.write("\nMean time spent in store: ," + str(round(statistics.mean(rush_array), 3)))
+                statistics_file.write("\nStd time spent in store: ," + str(round(statistics.stdev(rush_array), 3)))
+        statistics_file.close()
 
 
 if __name__ == '__main__':
@@ -363,5 +372,3 @@ if __name__ == '__main__':
     USER_YEAR = input("Please enter a year")
     USER_WEATHER = input("Is the weather nice? (yes / no)")
     write_data(datetime.date(int(USER_YEAR), int(USER_MONTH), int(USER_DAY)), USER_WEATHER == "yes")
-
-    write_data(datetime.date.today(), False)
