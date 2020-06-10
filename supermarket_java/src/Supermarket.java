@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -241,9 +242,6 @@ public class Supermarket {
                 customers_in_store[i] += 1;
             }
         }
-        System.out.println(lunch_times);
-        System.out.println(Arrays.toString(customers_in_store));
-        System.out.println(Arrays.toString(new_customers));
         csvReader.close();
 
         FileWriter csvWriter = new FileWriter(date.getDayOfWeek() + "_statistics.csv");
@@ -285,9 +283,27 @@ public class Supermarket {
         csvWriter.close();
     }
 
+    private void helper() throws IOException {
+        Scanner user_month = new Scanner(System.in);
+        System.out.println("Enter a month 1-12");
+        String month = user_month.nextLine();
+        Scanner user_day = new Scanner(System.in);
+        System.out.println("Enter a day 1-28/29/30/31");
+        String day = user_day.nextLine();
+        Scanner user_year = new Scanner(System.in);
+        System.out.println("Enter a year");
+        String year = user_year.nextLine();
+        Scanner user_weather = new Scanner(System.in);
+        System.out.println("Is the weather nice? y/n");
+        String weather = user_weather.nextLine();
+
+        this.write_data(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)), weather.equals("y"));
+        this.read_data(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
+    }
+
     public static void main(String[] args) throws IOException {
-        Supermarket a = new Supermarket();
-        a.write_data(LocalDate.now(), true);
-        a.read_data(LocalDate.now());
+        Supermarket supermarket = new Supermarket();
+        supermarket.helper();
+        System.out.println("Done creating csv files.");
     }
 }
