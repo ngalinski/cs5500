@@ -12,7 +12,7 @@ SENIOR_CHANCE_TUESDAY = 0.40
 
 # More seniors at 10 - 12 on Tuesday
 # Higher chance of being a senior on tuesday at 10-12
-class Shopper():
+class Shopper:
     """
     Shopper object class
     """

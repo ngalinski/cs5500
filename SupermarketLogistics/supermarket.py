@@ -11,7 +11,7 @@ import scipy.stats
 import numpy as np
 import holidays
 
-from Shopper import Shopper
+from shopper import Shopper
 
 # Store hours
 STORE_HOURS = [0, 15]
@@ -81,20 +81,6 @@ def time_spent_normal():
         return random.uniform(AVG_SHOPPER_TIME[0][0], AVG_SHOPPER_TIME[0][1])
     return random.uniform(AVG_SHOPPER_TIME[1][0], AVG_SHOPPER_TIME[1][1])
 
-    """
-    mean = 25
-    minH = 6
-    maxH = 75
-    std = 6
-    my_dist = my_distribution(minH, maxH, mean, std)
-    x = np.linspace(minH, maxH, 100)
-    plt.plot(x, my_dist.pdf(x))
-    plt.show()
-    print(my_dist.mean(), my_dist.std())
-    sample = my_dist.rvs(size=100000)
-    print('min:', sample.min(), 'max:', sample.max())
-    """
-
 
 # In case we need to do some kind of normal distribution
 # Unlikely but the code is here just in case
@@ -113,9 +99,11 @@ def my_distribution(min_val, max_val, mean, std):
     unscaled_mean = (mean - min_val) / scale
     unscaled_var = (std / scale) ** 2
     # Computation of alpha and beta can be derived from mean and variance formulas
-    t = unscaled_mean / (1 - unscaled_mean)
-    beta = ((t / unscaled_var) - (t * t) - (2 * t) - 1) / ((t * t * t) + (3 * t * t) + (3 * t) + 1)
-    alpha = beta * t
+    atten = unscaled_mean / (1 - unscaled_mean)
+    beta = ((atten / unscaled_var) - (atten * atten) -
+            (2 * atten) - 1) / ((atten * atten * atten) +
+                                (3 * atten * atten) + (3 * atten) + 1)
+    alpha = beta * atten
     # Not all parameters may produce a valid distribution
     if alpha <= 0 or beta <= 0:
         raise ValueError('Cannot create distribution for the given parameters.')
@@ -188,7 +176,7 @@ def generate_shopper(day_num, weather, is_tuesday):
 
             # 5 - 6:30
             # Dinner rush condition
-            elif time_entered_random < WEEKDAY_CHANCES[0] + WEEKDAY_CHANCES[1]\
+            elif time_entered_random < WEEKDAY_CHANCES[0] + WEEKDAY_CHANCES[1] \
                     + WEEKDAY_CHANCES[2] + WEEKDAY_CHANCES[3]:
                 time_entered = random.uniform(WEEKDAY_TIMES[3][0], WEEKDAY_TIMES[3][1])
                 if random.random() > RUSH:
@@ -211,7 +199,6 @@ def generate_shopper(day_num, weather, is_tuesday):
             time_entered = random.uniform(SENIOR_ENTER_TIME[0], SENIOR_ENTER_TIME[1])
             shopper.set_rush("Senior")
 
-        # TODO: Implement something that handles the extra 40% (waiting on response from instructor)
         # Cover nice weather
         elif weather:
             # Used short time definition as dinner rusher
@@ -306,7 +293,6 @@ def read_data(date):
     # Divides data based on category of lunch / dinner / senior / other
     # Other is normal shopping, should have highest deviation
     # Times on weekends should be longer
-    day = date.weekday()
     date_time_string = date.strftime("%m.%d.%Y")
     with open(date_time_string + ".csv", mode="r", newline='') as day_file_reader:
         reader = csv.reader(day_file_reader)
@@ -321,9 +307,6 @@ def read_data(date):
             time_entered = float(row[0])
             time_spent = float(row[1])
 
-            if int(time_entered) == 15:
-                print(row)
-
             new_customers[int(time_entered)] += 1
 
             # Count number people in store per hour
@@ -331,13 +314,11 @@ def read_data(date):
                 customers_in_store[i] += 1
 
             # Count rush times
-            rush = row[2]
-            senior = row[3]
-            if rush == 'Lunch':
+            if row[2] == 'Lunch':
                 rush_times[0].append(time_spent)
-            elif rush == 'Dinner':
+            elif row[2] == 'Dinner':
                 rush_times[1].append(time_spent)
-            elif senior == 'True':
+            elif row[3] == 'True':
                 rush_times[2].append(time_spent)
             else:
                 rush_times[3].append(time_spent)
@@ -356,17 +337,19 @@ def read_data(date):
         statistics_file.write("\nLunch: ," + str(len(rush_times[0])))
         statistics_file.write("\nDinner: ," + str(len(rush_times[1])))
         statistics_file.write("\nSeniors: ," + str(len(rush_times[2])))
-        statistics_file.write("\nCustomers in store at closing: ," + str(int(customers_in_store[-1])))
+        statistics_file.write("\nCustomers in store at closing: ," +
+                              str(int(customers_in_store[-1])))
         for rush_array in rush_times:
             if len(rush_array) != 0:
                 statistics_file.write("\n" + helper[rush_times.index(rush_array)])
-                statistics_file.write("\nMean time spent in store: ," + str(round(statistics.mean(rush_array), 3)))
-                statistics_file.write("\nStd time spent in store: ," + str(round(statistics.stdev(rush_array), 3)))
+                statistics_file.write("\nMean time spent in store: ," +
+                                      str(round(statistics.mean(rush_array), 3)))
+                statistics_file.write("\nStd time spent in store: ," +
+                                      str(round(statistics.stdev(rush_array), 3)))
         statistics_file.close()
 
 
 if __name__ == '__main__':
-
     USER_MONTH = input("Please enter a month (1 - 12)")
     USER_DAY = input("Please enter a day (1 - 28/29/30/31)")
     USER_YEAR = input("Please enter a year")
