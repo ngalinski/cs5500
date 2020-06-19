@@ -91,16 +91,16 @@ public class Supermarket {
         }
     }
 
-    private double handle_holidays(int year){
+    private double handle_holidays(int year, LocalDate date){
         Holidays holiday = new Holidays();
         List<LocalDate> holiday_list = holiday.collect_holidays(year);
-        if(holiday_list.contains(LocalDate.now())){
+        if(holiday_list.contains(date)){
             return HOLIDAY_MULT[2];
         }
-        else if(holiday_list.contains(LocalDate.now().plusDays(1))){
+        else if(holiday_list.contains(date.plusDays(1))){
             return HOLIDAY_MULT[1];
         }
-        else if (holiday_list.stream().anyMatch(i -> DAYS.between(LocalDate.now(), i) <= 7 )){
+        else if (holiday_list.stream().anyMatch(i -> DAYS.between(date, i) <= 7 && i.isAfter(date))){
             return HOLIDAY_MULT[0];
         }
         else{
@@ -124,6 +124,8 @@ public class Supermarket {
     }
 
     private void check_and_round_times(Shopper shopper) {
+        this.handle_closed_customers(shopper);
+        this.handle_close_to_closing(shopper);
         DecimalFormat df = new DecimalFormat("#.##");
         shopper.setTime_spent(Double.valueOf(df.format(shopper.getTime_spent())));
         shopper.setTime_entered(Double.valueOf(df.format(shopper.getTime_entered())));
@@ -144,7 +146,7 @@ public class Supermarket {
 
     private double get_num_shoppers(LocalDate date, boolean day_nice){
         int day_num = date.getDayOfWeek().getValue();
-        double num_shoppers = AVG_SHOPPERS[day_num] * this.handle_holidays(date.getYear());
+        double num_shoppers = AVG_SHOPPERS[day_num % 7] * this.handle_holidays(date.getYear(), date);
         if(day_nice && day_num > 5){
             double WEEKEND_NICE_WEATHER_MULT = 1.4;
             num_shoppers = num_shoppers * WEEKEND_NICE_WEATHER_MULT;
@@ -152,13 +154,17 @@ public class Supermarket {
         return num_shoppers;
     }
 
-    private void write_data(LocalDate date, boolean day_nice) throws IOException {
+    private void write_data(LocalDate date, boolean day_nice) throws Exception {
         int day_num = date.getDayOfWeek().getValue();
         FileWriter csvWriter = new FileWriter(date.getDayOfWeek() + ".csv");
         csvWriter.append("Time Entered (hr), Time Spend (min), Rushing, Senior\n");
 
         for(int i = 0; i < this.get_num_shoppers(date, day_nice); i++){
             Shopper shopper_here = this.generate_shopper(day_num, day_nice);
+
+            SQL_helper dao = new SQL_helper();
+            dao.writeData(shopper_here.toString());
+
             csvWriter.append(shopper_here.toString());
             csvWriter.append("\n");
         }
@@ -248,19 +254,19 @@ public class Supermarket {
         int total_customers = 0;
 
         csvWriter.append(String.valueOf(date)).append(" Statistics\n");
-        csvWriter.append(",6 to 7,7 to 8,8 to 9,9 to 10,10 to 11," +
+        csvWriter.append("6 to 7,7 to 8,8 to 9,9 to 10,10 to 11," +
                 "11 to 12,12 to 1,1 to 2,2 to 3,3 to 4," +
                 "4 to 5,5 to 6,6 to 7,7 to 8,8 to 9,Closing\n");
 
         csvWriter.append("New customers per hour: ,");
         for (int number : new_customers) {
             total_customers += number;
-            csvWriter.append(String.valueOf(number));
+            csvWriter.append(number + ",");
         }
 
         csvWriter.append("\nCustomers in store per hour: ,");
         for (int in_store : customers_in_store) {
-            csvWriter.append(String.valueOf(in_store));
+            csvWriter.append(in_store + ",");
         }
 
         csvWriter.append("\nTotal customers: ,").append(String.valueOf(total_customers));
@@ -283,7 +289,7 @@ public class Supermarket {
         csvWriter.close();
     }
 
-    private void helper() throws IOException {
+    private void helper() throws Exception {
         Scanner user_month = new Scanner(System.in);
         System.out.println("Enter a month 1-12");
         String month = user_month.nextLine();
@@ -301,7 +307,7 @@ public class Supermarket {
         this.read_data(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Supermarket supermarket = new Supermarket();
         supermarket.helper();
         System.out.println("Done creating csv files.");
