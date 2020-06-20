@@ -1,23 +1,23 @@
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
 public class SQL_helper {
     private Connection connect = null;
     private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
 
-    private static String url = "jdbc:mysql://localhost:3306/supermarket_logistics";
-    private static String user = "root", pass = "";
+    // Might need to change these depending on the user
+    private static final String url = "jdbc:mysql://localhost:3306/supermarket_logistics";
+    private static final String user = "root";
+    private static final String pass = "";
 
-    public void readDataBase() throws Exception {
+    /**
+     * This method is for reading the database, just disregard
+     */
+    public void readDataBase() {
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,37 +28,86 @@ public class SQL_helper {
             statement = connect.createStatement();
 
             // Result set get the result of the SQL query
-            resultSet = statement.executeQuery("select * from date_here_1");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM date_here");
 
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
                 System.out.println(id + " " + name);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void writeData(String shopper_info) throws Exception {
+    /**
+     * This method writes a new table for entering shopper data into
+     * @param date String value of date
+     */
+    public void writeTable(String date) {
         try {
+
+            // This connects the code to the sql server
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection(url, user, pass);
-            String query = " insert into date_here_1 (Time_entered, Time_spent, Status, Senior)"
-                    + " values (?, ?, ?, ?)";
 
-            String[] values = shopper_info.split(",");
+            statement = connect.createStatement();
 
-            PreparedStatement statement = connect.prepareStatement(query);
-            statement.setDouble(1, Double.parseDouble(values[0]));
-            statement.setDouble(2, Double.parseDouble(values[1]));
-            statement.setString(3, values[2]);
-            statement.setBoolean(4, Boolean.parseBoolean(values[3]));
+            // This gets rid of an existing table if it has the same name
+            String sql = "DROP TABLE IF EXISTS `" + date + "`";
+            statement.executeUpdate(sql);
 
-            statement.execute();
+            // This creates the table with what we want inside
+            sql = "CREATE TABLE `" + date +
+                    "` (Time_entered DOUBLE DEFAULT 0 not NULL, " +
+                    " Time_spent DOUBLE DEFAULT 0 not NULL, " +
+                    " Rush TINYTEXT not NULL, " +
+                    " Senior BOOLEAN not NULL)";
+
+            // This pushes the sql into the mysql database server
+            statement.executeUpdate(sql);
             connect.close();
+            System.out.println("Created table in given database...");
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method writes one shopper's info into the sql table
+     * @param sql_table String name of sql table
+     * @param shopper_info String of shopper info to be written
+     */
+    public void writeData(String sql_table, String shopper_info) {
+        String[] values = shopper_info.split(",");
+        double time_entered = Double.parseDouble(values[0]);
+        double time_spent = Double.parseDouble(values[1]);
+        String rush = values[2];
+        boolean senior = Boolean.parseBoolean(values[3]);
+
+        try {
+            // Connect to mysql database
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connect = DriverManager.getConnection(url, user, pass);
+            statement = connect.createStatement();
+
+            // Connect to sql table and prepare for value entry
+            // I know that there is an error here but it's only syntactical
+            PreparedStatement preparedStatement = connect.prepareStatement("INSERT INTO `" + sql_table +
+                    "`(Time_entered, Time_spent, Rush, Senior) " +
+                    "VALUES (?, ?, ?, ?)");
+
+            // Set up values to be pushed
+            preparedStatement.setDouble(1, time_entered);
+            preparedStatement.setDouble(2, time_spent);
+            preparedStatement.setString(3, rush);
+            preparedStatement.setBoolean(4, senior);
+
+            // Push values to sql server
+            preparedStatement.executeUpdate();
+            connect.close();
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

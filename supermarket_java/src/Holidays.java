@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
-
+/**
+ * Creates a list of holidays
+ * Don't worry too much about how this works, since it does
+ */
 public class Holidays{
 
-    private String[] DAYS = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    private final String[] DAYS = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     private LocalDate new_years (int year){
         return LocalDate.of(year,1,1);

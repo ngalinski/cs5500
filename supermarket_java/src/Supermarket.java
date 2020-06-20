@@ -5,25 +5,32 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * This is the encapsulating supermarket class which creates all shoppers
+ */
 public class Supermarket {
 
-    private int[] STORE_HOURS = {0, 15};
-    private int[] AVG_SHOPPERS = {5000, 800, 1000, 1200, 900, 2500, 4000};
-    private double RUSH_CHANCE = 0.75;
-
-    private double[] HOLIDAY_MULT = {1.15, 1.40, 0.2};
+    private final int[] STORE_HOURS = {0, 15};
+    private final int[] AVG_SHOPPERS = {5000, 800, 1000, 1200, 900, 2500, 4000};
+    private final double RUSH_CHANCE = 0.75;
+    private final double[] HOLIDAY_MULT = {1.15, 1.40, 0.2};
+    private final double WEEKEND_NICE_WEATHER_MULT = 1.4;
 
     // Time spent
-    private int[][] AVG_SHOPPER_WEEKDAY = {{6, 25}, {25, 75}};
-    private int[] AVG_SHOPPER_WEEKEND = {50, 70};
-    private int[] WEEKEND_SHORT_TIME = {16, 24};
-    private int[] SENIOR_TIME_SPENT = {45, 60};
-    private int[] LUNCH_RUSH = {6, 14};
-    private int[] DINNER_RUSH = {16, 24};
+    private final int[][] AVG_SHOPPER_WEEKDAY = {{6, 25}, {25, 75}};
+    private final int[] AVG_SHOPPER_WEEKEND = {50, 70};
+    private final int[] WEEKEND_SHORT_TIME = {16, 24};
+    private final int[] SENIOR_TIME_SPENT = {45, 60};
+    private final int[] LUNCH_RUSH = {6, 14};
+    private final int[] DINNER_RUSH = {16, 24};
 
+    /**
+     * Sets shopper time for a shopper on a weekday
+     * Not rushing, not senior
+     * @return time shopper spends in store as double
+     */
     private double set_weekday_normal() {
         if(Math.random() < 0.5) {
             return AVG_SHOPPER_WEEKDAY[0][0] + Math.random() *
@@ -35,10 +42,19 @@ public class Supermarket {
         }
     }
 
+    /**
+     * Sets shopper time for senior shopper
+     * @return time senior spends in store as double
+     */
     private double set_senior_time_spent() {
         return SENIOR_TIME_SPENT[0] + Math.random() * (SENIOR_TIME_SPENT[1] - SENIOR_TIME_SPENT[0]);
     }
 
+
+    /**
+     * Sets shopper time for lunch rush shopper
+     * @return time lunch rush shopper spends in store as double
+     */
     private double set_lunch_time_spent() {
         if(Math.random() < RUSH_CHANCE) {
             return LUNCH_RUSH[0] + Math.random() * (LUNCH_RUSH[1] - LUNCH_RUSH[0]);
@@ -48,6 +64,10 @@ public class Supermarket {
         }
     }
 
+    /**
+     * Sets shopper time for dinner rush shopper
+     * @return time dinner rush shopper spends in store as double
+     */
     private double set_dinner_time_spent() {
         if(Math.random() < RUSH_CHANCE) {
             return DINNER_RUSH[0] + Math.random() * (DINNER_RUSH[1] - DINNER_RUSH[0]);
@@ -57,14 +77,30 @@ public class Supermarket {
         }
     }
 
+    /**
+     * Sets shopper time for a normal shopper on a weekend
+     * @return time shopper spends in store as double
+     */
     private double set_weekend_normal() {
         return AVG_SHOPPER_WEEKEND[0] + Math.random() * (AVG_SHOPPER_WEEKEND[1] - AVG_SHOPPER_WEEKEND[0]);
     }
 
+    /**
+     * Sets shopper time for a short shopper on a weekend
+     * Specifically will be used for nice weather weekends
+     * @return time shopper spends in store as double
+     */
     private double set_weekend_short() {
         return WEEKEND_SHORT_TIME[0] + Math.random() * (WEEKEND_SHORT_TIME[1] - WEEKEND_SHORT_TIME[0]);
     }
 
+    /**
+     * Handles shopper time for a shopper on weekend
+     * This is an encapsulating method for all weekend times
+     * @param is_senior boolean whether shopper is senior
+     * @param day_nice boolean whether day is nice on weekend
+     * @return time shopper spends in store as double
+     */
     private double set_weekend_time_spent(boolean is_senior, boolean day_nice) {
         double WEEKEND_SHORT_VISITS = 0.5;
         if(is_senior){
@@ -78,6 +114,12 @@ public class Supermarket {
         }
     }
 
+    /**
+     * Handles shopper time for a shopper on weekday
+     * This is an encapsulating method for all weekday times
+     * @param rush String for what type of shopper
+     * @return time shopper spends in store as double
+     */
     private double set_weekday_time_spent(String rush) {
         switch(rush) {
             case "Lunch":
@@ -91,6 +133,13 @@ public class Supermarket {
         }
     }
 
+    /**
+     * This method handles the holiday multiplier
+     * Checks today, tomorrow, within a week
+     * @param year Integer value of year
+     * @param date LocalDate type of date
+     * @return Holiday multiplier as a double
+     */
     private double handle_holidays(int year, LocalDate date){
         Holidays holiday = new Holidays();
         List<LocalDate> holiday_list = holiday.collect_holidays(year);
@@ -108,6 +157,13 @@ public class Supermarket {
         }
     }
 
+    /**
+     * This method specifically handles customers who come in too close to closing
+     * If they do, then the rounder will round them to enter at 15.00
+     * This method will make sure they do not enter at 15.00
+     * Changes time entered to 14.99
+     * @param shopper Shopper variable to be checked
+     */
     private void handle_close_to_closing(Shopper shopper) {
         DecimalFormat df = new DecimalFormat("#.##");
         if(Double.valueOf(df.format(shopper.getTime_entered())).intValue() == STORE_HOURS[1]){
@@ -115,22 +171,39 @@ public class Supermarket {
         }
     }
 
+    /**
+     * This method specifically handles customers who stay past closing
+     * Changes time spent to a viable time so they leave at closing
+     * @param shopper Shopper variable to be checked
+     */
     private void handle_closed_customers(Shopper shopper) {
         if(shopper.getTime_entered() + (shopper.getTime_spent() / 60) > STORE_HOURS[1]) {
             double time_spent = STORE_HOURS[1] - shopper.getTime_entered();
             DecimalFormat df = new DecimalFormat("#.##");
-            shopper.setTime_spent(Double.valueOf(df.format(time_spent)));
+            shopper.setTime_spent(Double.parseDouble(df.format(time_spent)));
         }
     }
 
+    /**
+     * Encapsulating method for checking and rounding shopper times
+     * Makes those times manageable and feasible
+     * @param shopper Shopper variable to be checked
+     */
     private void check_and_round_times(Shopper shopper) {
-        this.handle_closed_customers(shopper);
         this.handle_close_to_closing(shopper);
+        this.handle_closed_customers(shopper);
+
         DecimalFormat df = new DecimalFormat("#.##");
-        shopper.setTime_spent(Double.valueOf(df.format(shopper.getTime_spent())));
-        shopper.setTime_entered(Double.valueOf(df.format(shopper.getTime_entered())));
+        shopper.setTime_spent(Double.parseDouble(df.format(shopper.getTime_spent())));
+        shopper.setTime_entered(Double.parseDouble(df.format(shopper.getTime_entered())));
     }
 
+    /**
+     * Generates a single shopper variable
+     * @param day_num Integer number of day
+     * @param day_nice Boolean whether day is nice
+     * @return Shopper variable
+     */
     private Shopper generate_shopper(int day_num, boolean day_nice){
         Shopper shopper = new Shopper(day_num);
         if(day_num < 5){
@@ -139,31 +212,49 @@ public class Supermarket {
         else{
             shopper.setTime_spent(this.set_weekend_time_spent(shopper.getIs_senior(), day_nice));
         }
-
         this.check_and_round_times(shopper);
         return shopper;
     }
 
-    private double get_num_shoppers(LocalDate date, boolean day_nice){
+    /**
+     * Get total number of shoppers for a specific date
+     * Will factor in weather for weekends
+     * Will factor in holidays
+     * @param date LocalDate of date
+     * @param day_nice Boolean whether day nice
+     * @return Integer number of shoppers for date
+     */
+    private int get_num_shoppers(LocalDate date, boolean day_nice){
         int day_num = date.getDayOfWeek().getValue();
         double num_shoppers = AVG_SHOPPERS[day_num % 7] * this.handle_holidays(date.getYear(), date);
         if(day_nice && day_num > 5){
-            double WEEKEND_NICE_WEATHER_MULT = 1.4;
             num_shoppers = num_shoppers * WEEKEND_NICE_WEATHER_MULT;
         }
-        return num_shoppers;
+        return (int)num_shoppers;
     }
 
+    /**
+     * This method writes data to csv and to mysql
+     * Writes shopper data for specific date
+     * Connects to sql using sql helper class
+     * @param date LocalDate of date
+     * @param day_nice Boolean whether day nice
+     * @throws Exception SQL exceptions
+     */
     private void write_data(LocalDate date, boolean day_nice) throws Exception {
         int day_num = date.getDayOfWeek().getValue();
         FileWriter csvWriter = new FileWriter(date.getDayOfWeek() + ".csv");
         csvWriter.append("Time Entered (hr), Time Spend (min), Rushing, Senior\n");
 
+        // These lines connect to mysql and create a new table for the date
+        SQL_helper sql_connector = new SQL_helper();
+        sql_connector.writeTable(date.toString());
+
         for(int i = 0; i < this.get_num_shoppers(date, day_nice); i++){
             Shopper shopper_here = this.generate_shopper(day_num, day_nice);
 
-            SQL_helper dao = new SQL_helper();
-            dao.writeData(shopper_here.toString());
+            // This line writes to mysql
+            sql_connector.writeData(date.toString(), shopper_here.toString());
 
             csvWriter.append(shopper_here.toString());
             csvWriter.append("\n");
@@ -173,17 +264,32 @@ public class Supermarket {
         csvWriter.close();
     }
 
+    /**
+     * Generate mean of arraylist
+     * @param table ArrayList of doubles
+     * @return mean of arraylist
+     */
     private double mean(ArrayList<Double> table)
     {
-        int total = 0;
+        Double total = 0.0;
 
         for (Double value : table)
         {
             total+= value;
         }
-        return total/table.size();
+
+        double mean = total/table.size();
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.format(mean);
+
+        return mean;
     }
 
+    /**
+     * Generate standard deviation of arraylist
+     * @param table ArrayList of doubles
+     * @return standard deviation of table
+     */
     private double sd(ArrayList<Double> table)
     {
         double mean = mean(table);
@@ -195,11 +301,21 @@ public class Supermarket {
             temp += squareDiffToMean;
         }
 
-        double meanOfDiffs = (double) temp / (double) (table.size());
-        return Math.sqrt(meanOfDiffs);
+        double meanOfDiffs = temp / (double) (table.size());
+        double sd = Math.sqrt(meanOfDiffs);
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.format(sd);
+
+        return sd;
     }
 
-    private void read_data(LocalDate date) throws IOException {
+    /**
+     * This method is for generating a statistics csv for the specific date
+     * Customer can call this method if they want
+     * @param date LocalDate type of date to be looked at
+     * @throws IOException If file does not exist
+     */
+    private void generate_statistics(LocalDate date) throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(date. getDayOfWeek() + ".csv"));
         String row;
 
@@ -222,7 +338,7 @@ public class Supermarket {
 
         while ((row = csvReader.readLine()) != null){
             String[] data = row.split(",");
-            Double time_spent = Double.valueOf(data[1]);
+            double time_spent = Double.parseDouble(data[1]);
             switch (data[2]){
                 case "Lunch":
                     lunch_customers += 1;
@@ -241,10 +357,10 @@ public class Supermarket {
                     normal_times.add(time_spent);
             }
 
-            Double time_entered = Double.valueOf(data[0]);
-            new_customers[time_entered.intValue()] += 1;
+            double time_entered = Double.parseDouble(data[0]);
+            new_customers[(int) time_entered] += 1;
 
-            for(int i = time_entered.intValue(); i <= (int)(time_entered + (time_spent / 60)); i++){
+            for(int i = (int) time_entered; i <= (int)(time_entered + (time_spent / 60)); i++){
                 customers_in_store[i] += 1;
             }
         }
@@ -261,12 +377,12 @@ public class Supermarket {
         csvWriter.append("New customers per hour: ,");
         for (int number : new_customers) {
             total_customers += number;
-            csvWriter.append(number + ",");
+            csvWriter.append(String.valueOf(number)).append(",");
         }
 
         csvWriter.append("\nCustomers in store per hour: ,");
         for (int in_store : customers_in_store) {
-            csvWriter.append(in_store + ",");
+            csvWriter.append(String.valueOf(in_store)).append(",");
         }
 
         csvWriter.append("\nTotal customers: ,").append(String.valueOf(total_customers));
@@ -292,24 +408,35 @@ public class Supermarket {
     private void helper() throws Exception {
         Scanner user_month = new Scanner(System.in);
         System.out.println("Enter a month 1-12");
-        String month = user_month.nextLine();
+        int month = Integer.parseInt(user_month.nextLine());
+
         Scanner user_day = new Scanner(System.in);
         System.out.println("Enter a day 1-28/29/30/31");
-        String day = user_day.nextLine();
+        int day = Integer.parseInt(user_day.nextLine());
+
         Scanner user_year = new Scanner(System.in);
         System.out.println("Enter a year");
-        String year = user_year.nextLine();
+        int year = Integer.parseInt(user_year.nextLine());
+
         Scanner user_weather = new Scanner(System.in);
         System.out.println("Is the weather nice? y/n");
-        String weather = user_weather.nextLine();
+        boolean weather = user_weather.nextLine().equals("y");
 
-        this.write_data(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)), weather.equals("y"));
-        this.read_data(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
+        Scanner whether_statistics = new Scanner(System.in);
+        System.out.println("Do you want a statistics csv? y/n");
+        boolean statistics = whether_statistics.nextLine().equals("y");
+
+        this.write_data(LocalDate.of(year, month, day), weather);
+
+        if(statistics){
+            this.generate_statistics(LocalDate.of(year, month, day));
+        }
     }
 
     public static void main(String[] args) throws Exception {
         Supermarket supermarket = new Supermarket();
         supermarket.helper();
         System.out.println("Done creating csv files.");
+        System.out.println("Done updating mysql.");
     }
 }
