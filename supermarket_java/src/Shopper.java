@@ -13,30 +13,38 @@ import java.util.*;
  */
 public class Shopper {
 
-    private final double RUSH = 0.80;
-    private final double SENIOR_CHANCE = 0.16;
-    private final double SENIOR_CHANCE_TUESDAY = 0.40;
-    private final double SENIOR_DISCOUNT_CHANCE = 0.65;
-    private final int[] SENIOR_ENTER_TIME = {0, 12};
-    private final int[] SENIOR_DISCOUNT_TIME = {4, 6};
-    private final int[] STORE_HOURS = {0, 15};
-    private final double[][] WEEKDAY_TIMES = {{0, 6}, {6, 7}, {7, 11}, {11, 12.5}, {12.5, 15}};
+    private Double[] DEFAULT_LUNCH_TIMES;
+    private Double[] DEFAULT_DINNER_TIMES;
+    private Double[][] WEEKDAY_TIMES;
+
+    private final Double[] STORE_HOURS = {0d, 15d};
 
     private final int day;
     private double time_spent, time_entered;
     private boolean is_senior;
     private String rush;
+    private final Parameters parameters;
 
     /**
      * Shopper object has time entered, time spent
      * Also has rush type and whether a senior
      * @param day Integer number of day in week
      */
-    public Shopper(int day){
+    public Shopper(int day, Parameters passed_parameters){
+        this.parameters = passed_parameters;
+        this.setTimes();
         this.day = day;
         this.senior();
         this.initial_time_entered();
         this.setRush();
+    }
+
+    public void setTimes(){
+        DEFAULT_LUNCH_TIMES = parameters.getDEFAULT_LUNCH_TIMES();
+        DEFAULT_DINNER_TIMES = parameters.getDEFAULT_DINNER_TIMES();
+        WEEKDAY_TIMES = new Double[][] {{STORE_HOURS[0], DEFAULT_LUNCH_TIMES[0]},
+                {DEFAULT_LUNCH_TIMES[0], DEFAULT_LUNCH_TIMES[1]}, {DEFAULT_LUNCH_TIMES[1], DEFAULT_DINNER_TIMES[0]},
+                {DEFAULT_DINNER_TIMES[0], DEFAULT_DINNER_TIMES[1]}, {DEFAULT_DINNER_TIMES[1], STORE_HOURS[1]}};
     }
 
     /**
@@ -44,11 +52,11 @@ public class Shopper {
      * Higher chance of being senior on tuesday
      */
     private void senior(){
-        if(this.day == 2){
-            this.is_senior = Math.random() < this.SENIOR_CHANCE_TUESDAY;
+        if(this.day == parameters.getSENIOR_DAY()){
+            this.is_senior = Math.random() < parameters.getSENIOR_CHANCE_DISCOUNT_DAY();
         }
         else{
-            this.is_senior = Math.random() < this.SENIOR_CHANCE;
+            this.is_senior = Math.random() < parameters.getSENIOR_CHANCE();
         }
     }
 
@@ -78,12 +86,12 @@ public class Shopper {
      * @return Double senior time
      */
     private double setTIme_entered_senior() {
-        if(this.day == 2 && Math.random() < SENIOR_DISCOUNT_CHANCE) {
-            return SENIOR_DISCOUNT_TIME[0] + Math.random() *
-                    (SENIOR_DISCOUNT_TIME[1] - SENIOR_DISCOUNT_TIME[0]);
+        if(this.day == parameters.getSENIOR_DAY() && Math.random() < parameters.getSENIOR_DISCOUNT_CHANCE()) {
+            return parameters.getSENIOR_DISCOUNT_TIME()[0] + Math.random() *
+                    (parameters.getSENIOR_DISCOUNT_TIME()[1] - parameters.getSENIOR_DISCOUNT_TIME()[0]);
         }
         else{
-            return Math.random() * this.SENIOR_ENTER_TIME[1];
+            return Math.random() * parameters.getSENIOR_ENTER_TIME()[1];
         }
     }
 
@@ -94,7 +102,7 @@ public class Shopper {
     private double setTime_entered_regular() {
         Random rand = new Random();
         if(this.day < 5) {
-            double[] times = WEEKDAY_TIMES[rand.nextInt(5)];
+            Double[] times = WEEKDAY_TIMES[rand.nextInt(5)];
             return times[0] + Math.random() * (times[1] - times[0]);
         }
         else{
@@ -115,11 +123,13 @@ public class Shopper {
      * Types include lunch, dinner, senior, normal
      */
     private void setRush() {
-        if(6 <= this.getTime_entered() && this.getTime_entered() <= 7 && Math.random() <= RUSH) {
+        if(6 <= this.getTime_entered() && this.getTime_entered() <= 7
+                && Math.random() <= parameters.getRUSH_CHANCE()) {
             this.rush = "Lunch";
         }
 
-        else if(11 <= this.getTime_entered() && this.getTime_entered() <= 12.5 && Math.random() <= RUSH){
+        else if(11 <= this.getTime_entered() && this.getTime_entered() <= 12.5
+                && Math.random() <= parameters.getRUSH_CHANCE()){
             this.rush = "Dinner";
         }
 

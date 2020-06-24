@@ -42,9 +42,9 @@ public class SQL_helper {
 
     /**
      * This method writes a new table for entering shopper data into
-     * @param date String value of date
+     * @param name String value of date
      */
-    public void writeTable(String date) {
+    public void writeTable(String name) {
         try {
 
             // This connects the code to the sql server
@@ -53,12 +53,14 @@ public class SQL_helper {
 
             statement = connect.createStatement();
 
+            /*
             // This gets rid of an existing table if it has the same name
             String sql = "DROP TABLE IF EXISTS `" + date + "`";
             statement.executeUpdate(sql);
+             */
 
             // This creates the table with what we want inside
-            sql = "CREATE TABLE `" + date +
+            String sql = "CREATE TABLE `" + name +
                     "` (Time_entered DOUBLE DEFAULT 0 not NULL, " +
                     " Time_spent DOUBLE DEFAULT 0 not NULL, " +
                     " Rush TINYTEXT not NULL, " +
@@ -67,10 +69,70 @@ public class SQL_helper {
             // This pushes the sql into the mysql database server
             statement.executeUpdate(sql);
             connect.close();
-            System.out.println("Created table in given database...");
+            System.out.println("Created shopper table in given database...");
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method writes a new table for entering shopper data into
+     * @param name String value of date
+     */
+    public void writeParametersTable(String name) {
+        try {
+
+            // This connects the code to the sql server
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connect = DriverManager.getConnection(url, user, pass);
+
+            statement = connect.createStatement();
+
+            // This creates the table with what we want inside
+            String sql = "CREATE TABLE `" + name +
+                    "` (Parameter_names TINYTEXT not NULL, " +
+                    " Parameter_values TINYTEXT not NULL)";
+
+            // This pushes the sql into the mysql database server
+            statement.executeUpdate(sql);
+            connect.close();
+            System.out.println("Created parameters table in given database...");
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method writes one shopper's info into the sql table
+     * @param sql_table String name of sql table
+     * @param parameter_name String parameter name
+     * @param parameter_value String parameter value
+     */
+    public void writeParameters(String sql_table, String parameter_name, String parameter_value) {
+        try {
+            // Connect to mysql database
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connect = DriverManager.getConnection(url, user, pass);
+            statement = connect.createStatement();
+
+            // Connect to sql table and prepare for value entry
+            // I know that there is an error here but it's only syntactical
+            PreparedStatement preparedStatement = connect.prepareStatement("INSERT INTO `" + sql_table +
+                    "`(Parameter_names, Parameter_values) " +
+                    "VALUES (?, ?)");
+
+            // Set up values to be pushed
+            preparedStatement.setString(1, parameter_name);
+            preparedStatement.setString(2, parameter_value);
+
+            // Push values to sql server
+            preparedStatement.executeUpdate();
+            connect.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 

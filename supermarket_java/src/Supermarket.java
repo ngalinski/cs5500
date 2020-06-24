@@ -1,10 +1,8 @@
 import java.io.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
@@ -12,11 +10,10 @@ import static java.time.temporal.ChronoUnit.DAYS;
  */
 public class Supermarket {
 
+    private Parameters parameters;
+
     private final int[] STORE_HOURS = {0, 15};
     private final int[] AVG_SHOPPERS = {5000, 800, 1000, 1200, 900, 2500, 4000};
-    private final double RUSH_CHANCE = 0.75;
-    private final double[] HOLIDAY_MULT = {1.15, 1.40, 0.2};
-    private final double WEEKEND_NICE_WEATHER_MULT = 1.4;
 
     // Time spent
     private final int[][] AVG_SHOPPER_WEEKDAY = {{6, 25}, {25, 75}};
@@ -25,6 +22,10 @@ public class Supermarket {
     private final int[] SENIOR_TIME_SPENT = {45, 60};
     private final int[] LUNCH_RUSH = {6, 14};
     private final int[] DINNER_RUSH = {16, 24};
+
+    public Supermarket(){
+        this.parameters = new Parameters();
+    }
 
     /**
      * Sets shopper time for a shopper on a weekday
@@ -56,12 +57,7 @@ public class Supermarket {
      * @return time lunch rush shopper spends in store as double
      */
     private double set_lunch_time_spent() {
-        if(Math.random() < RUSH_CHANCE) {
-            return LUNCH_RUSH[0] + Math.random() * (LUNCH_RUSH[1] - LUNCH_RUSH[0]);
-        }
-        else{
-            return set_weekday_normal();
-        }
+        return LUNCH_RUSH[0] + Math.random() * (LUNCH_RUSH[1] - LUNCH_RUSH[0]);
     }
 
     /**
@@ -69,12 +65,7 @@ public class Supermarket {
      * @return time dinner rush shopper spends in store as double
      */
     private double set_dinner_time_spent() {
-        if(Math.random() < RUSH_CHANCE) {
-            return DINNER_RUSH[0] + Math.random() * (DINNER_RUSH[1] - DINNER_RUSH[0]);
-        }
-        else{
-            return set_weekday_normal();
-        }
+        return DINNER_RUSH[0] + Math.random() * (DINNER_RUSH[1] - DINNER_RUSH[0]);
     }
 
     /**
@@ -144,13 +135,13 @@ public class Supermarket {
         Holidays holiday = new Holidays();
         List<LocalDate> holiday_list = holiday.collect_holidays(year);
         if(holiday_list.contains(date)){
-            return HOLIDAY_MULT[2];
+            return parameters.getHOLIDAY_MULT()[2];
         }
         else if(holiday_list.contains(date.plusDays(1))){
-            return HOLIDAY_MULT[1];
+            return parameters.getHOLIDAY_MULT()[2];
         }
         else if (holiday_list.stream().anyMatch(i -> DAYS.between(date, i) <= 7 && i.isAfter(date))){
-            return HOLIDAY_MULT[0];
+            return parameters.getHOLIDAY_MULT()[2];
         }
         else{
             return 1;
@@ -204,8 +195,8 @@ public class Supermarket {
      * @param day_nice Boolean whether day is nice
      * @return Shopper variable
      */
-    private Shopper generate_shopper(int day_num, boolean day_nice){
-        Shopper shopper = new Shopper(day_num);
+    private Shopper generate_shopper(int day_num, boolean day_nice) {
+        Shopper shopper = new Shopper(day_num, parameters);
         if(day_num < 5){
             shopper.setTime_spent(this.set_weekday_time_spent(shopper.getRush()));
         }
@@ -228,7 +219,7 @@ public class Supermarket {
         int day_num = date.getDayOfWeek().getValue();
         double num_shoppers = AVG_SHOPPERS[day_num % 7] * this.handle_holidays(date.getYear(), date);
         if(day_nice && day_num > 5){
-            num_shoppers = num_shoppers * WEEKEND_NICE_WEATHER_MULT;
+            num_shoppers = num_shoppers * parameters.getWEEKEND_NICE_WEATHER_MULT();
         }
         return (int)num_shoppers;
     }
@@ -248,13 +239,23 @@ public class Supermarket {
 
         // These lines connect to mysql and create a new table for the date
         SQL_helper sql_connector = new SQL_helper();
-        sql_connector.writeTable(date.toString());
+        String table_name = date.toString() + java.time.LocalTime.now();
+
+        sql_connector.writeTable(table_name + parameters.getNaming());
+        sql_connector.writeParametersTable(table_name);
+
+        String[] parameter_names = parameters.passNames();
+        String[] parameter_values = parameters.passValues();
+
+        for(int i = 0; i < parameter_names.length; i++){
+            sql_connector.writeParameters(table_name, parameter_names[i], parameter_values[i]);
+        }
 
         for(int i = 0; i < this.get_num_shoppers(date, day_nice); i++){
             Shopper shopper_here = this.generate_shopper(day_num, day_nice);
 
             // This line writes to mysql
-            sql_connector.writeData(date.toString(), shopper_here.toString());
+            sql_connector.writeData(table_name + parameters.getNaming(), shopper_here.toString());
 
             csvWriter.append(shopper_here.toString());
             csvWriter.append("\n");
@@ -265,144 +266,34 @@ public class Supermarket {
     }
 
     /**
-     * Generate mean of arraylist
-     * @param table ArrayList of doubles
-     * @return mean of arraylist
+     * This method changed parameters for the program.
+     * Read below to see what changed what.
      */
-    private double mean(ArrayList<Double> table)
-    {
-        Double total = 0.0;
+    private void changeParameters(){
+        int index = 100;
+        while(index != 0) {
+            Scanner change = new Scanner(System.in);
+            System.out.println("Would you like to change parameters? Enter 0-11 (mod 12).\n" +
+                    "1. Senior discount day\n" +
+                    "2. Senior chance on regular day\n" +
+                    "3. Senior enter hours\n" +
+                    "4. Senior discount time\n" +
+                    "5. Senior chance on discount day\n" +
+                    "6. Senior chance in discount time on discount day\n" +
+                    "7. Rush chance\n" +
+                    "8. Lunch times\n" +
+                    "9. Dinner times\n" +
+                    "10. Nice weather weekend multiplier\n" +
+                    "11. Holiday multiplier\n" +
+                    "0 to exit");
 
-        for (Double value : table)
-        {
-            total+= value;
-        }
-
-        double mean = total/table.size();
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.format(mean);
-
-        return mean;
-    }
-
-    /**
-     * Generate standard deviation of arraylist
-     * @param table ArrayList of doubles
-     * @return standard deviation of table
-     */
-    private double sd(ArrayList<Double> table)
-    {
-        double mean = mean(table);
-        double temp = 0;
-
-        for (Double value : table)
-        {
-            double squareDiffToMean = Math.pow(value - mean, 2);
-            temp += squareDiffToMean;
-        }
-
-        double meanOfDiffs = temp / (double) (table.size());
-        double sd = Math.sqrt(meanOfDiffs);
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.format(sd);
-
-        return sd;
-    }
-
-    /**
-     * This method is for generating a statistics csv for the specific date
-     * Customer can call this method if they want
-     * @param date LocalDate type of date to be looked at
-     * @throws IOException If file does not exist
-     */
-    private void generate_statistics(LocalDate date) throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader(date. getDayOfWeek() + ".csv"));
-        String row;
-
-        int lunch_customers = 0;
-        int dinner_customers = 0;
-        int senior_customers = 0;
-        int normal_customers = 0;
-
-        csvReader.readLine();
-
-        ArrayList<Double> lunch_times = new ArrayList<>();
-        ArrayList<Double> dinner_times = new ArrayList<>();
-        ArrayList<Double> senior_times = new ArrayList<>();
-        ArrayList<Double> normal_times = new ArrayList<>();
-
-        Integer[] new_customers = new Integer[16];
-        Integer[] customers_in_store = new Integer[32];
-        Arrays.fill(new_customers, 0);
-        Arrays.fill(customers_in_store, 0);
-
-        while ((row = csvReader.readLine()) != null){
-            String[] data = row.split(",");
-            double time_spent = Double.parseDouble(data[1]);
-            switch (data[2]){
-                case "Lunch":
-                    lunch_customers += 1;
-                    lunch_times.add(time_spent);
-                    break;
-                case "Dinner":
-                    dinner_customers += 1;
-                    dinner_times.add(time_spent);
-                    break;
-                case "Senior":
-                    senior_customers += 1;
-                    senior_times.add(time_spent);
-                    break;
-                default:
-                    normal_customers += 1;
-                    normal_times.add(time_spent);
-            }
-
-            double time_entered = Double.parseDouble(data[0]);
-            new_customers[(int) time_entered] += 1;
-
-            for(int i = (int) time_entered; i <= (int)(time_entered + (time_spent / 60)); i++){
-                customers_in_store[i] += 1;
+            try{
+                index = change.nextInt() % 12;
+                parameters.edit_values(index);
+            } catch (InputMismatchException e){
+                System.err.println("Input an integer.");
             }
         }
-        csvReader.close();
-
-        FileWriter csvWriter = new FileWriter(date.getDayOfWeek() + "_statistics.csv");
-        int total_customers = 0;
-
-        csvWriter.append(String.valueOf(date)).append(" Statistics\n");
-        csvWriter.append("6 to 7,7 to 8,8 to 9,9 to 10,10 to 11," +
-                "11 to 12,12 to 1,1 to 2,2 to 3,3 to 4," +
-                "4 to 5,5 to 6,6 to 7,7 to 8,8 to 9,Closing\n");
-
-        csvWriter.append("New customers per hour: ,");
-        for (int number : new_customers) {
-            total_customers += number;
-            csvWriter.append(String.valueOf(number)).append(",");
-        }
-
-        csvWriter.append("\nCustomers in store per hour: ,");
-        for (int in_store : customers_in_store) {
-            csvWriter.append(String.valueOf(in_store)).append(",");
-        }
-
-        csvWriter.append("\nTotal customers: ,").append(String.valueOf(total_customers));
-        csvWriter.append("\nLunch: ,").append(String.valueOf(lunch_customers));
-        csvWriter.append("\nDinner: ,").append(String.valueOf(dinner_customers));
-        csvWriter.append("\nSenior: ,").append(String.valueOf(senior_customers));
-        csvWriter.append("\nNormal: ,").append(String.valueOf(normal_customers));
-        csvWriter.append("\nCustomers in store at closing: ,").append(String.valueOf(customers_in_store[customers_in_store.length - 1]));
-
-        csvWriter.append("\nLunch mean: ,").append(String.valueOf(mean(lunch_times)));
-        csvWriter.append("\nLunch std: ,").append(String.valueOf(sd(lunch_times)));
-        csvWriter.append("\nDinner mean: ,").append(String.valueOf(mean(dinner_times)));
-        csvWriter.append("\nDinner std: ,").append(String.valueOf(sd(dinner_times)));
-        csvWriter.append("\nSenior mean: ,").append(String.valueOf(mean(senior_times)));
-        csvWriter.append("\nSenior std: ,").append(String.valueOf(sd(senior_times)));
-        csvWriter.append("\nNormal mean: ,").append(String.valueOf(mean(normal_times)));
-        csvWriter.append("\nNormal std: ,").append(String.valueOf(sd(normal_times)));
-
-        csvWriter.flush();
-        csvWriter.close();
     }
 
     private void helper() throws Exception {
@@ -422,14 +313,18 @@ public class Supermarket {
         System.out.println("Is the weather nice? y/n");
         boolean weather = user_weather.nextLine().equals("y");
 
+        LocalDate date = LocalDate.of(year, month, day);
+
+        this.changeParameters();
+        this.write_data(date, weather);
+
         Scanner whether_statistics = new Scanner(System.in);
         System.out.println("Do you want a statistics csv? y/n");
         boolean statistics = whether_statistics.nextLine().equals("y");
 
-        this.write_data(LocalDate.of(year, month, day), weather);
-
         if(statistics){
-            this.generate_statistics(LocalDate.of(year, month, day));
+            Stats_writer stats_writer = new Stats_writer();
+            stats_writer.generate_statistics(date);
         }
     }
 
