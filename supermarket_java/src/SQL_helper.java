@@ -77,7 +77,7 @@ public class SQL_helper {
     }
 
     /**
-     * This method writes a new table for entering shopper data into
+     * This method writes a new table for entering parameter information
      * @param name String value of date
      */
     public void writeParametersTable(String name) {
@@ -105,7 +105,7 @@ public class SQL_helper {
     }
 
     /**
-     * This method writes one shopper's info into the sql table
+     * This method writes parameter values for current date and parameter situation
      * @param sql_table String name of sql table
      * @param parameter_name String parameter name
      * @param parameter_value String parameter value

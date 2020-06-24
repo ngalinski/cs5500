@@ -1,0 +1,1 @@
+var CodeMR_ProjectMetrics = {"Project Name":"supermarket_java working set: {supermarket_java}", "Number of Highly Problematic Classes":0, "Number of Entities":6, "Number of Problematic Classes":0, "Class Lines of Code":792, "Number of External Packages":7, "Number of Packages":1, "Number of External Entities":30}

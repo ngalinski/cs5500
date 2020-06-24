@@ -241,15 +241,17 @@ public class Supermarket {
         SQL_helper sql_connector = new SQL_helper();
         String table_name = date.toString() + java.time.LocalTime.now();
 
-        sql_connector.writeTable(table_name + parameters.getNaming());
+        // Create parameters table
         sql_connector.writeParametersTable(table_name);
-
         String[] parameter_names = parameters.passNames();
         String[] parameter_values = parameters.passValues();
 
         for(int i = 0; i < parameter_names.length; i++){
             sql_connector.writeParameters(table_name, parameter_names[i], parameter_values[i]);
         }
+
+        // Create shopper table
+        sql_connector.writeTable(table_name + parameters.getNaming());
 
         for(int i = 0; i < this.get_num_shoppers(date, day_nice); i++){
             Shopper shopper_here = this.generate_shopper(day_num, day_nice);

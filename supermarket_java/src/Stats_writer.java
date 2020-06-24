@@ -80,7 +80,7 @@ public class Stats_writer {
         ArrayList<Double> normal_times = new ArrayList<>();
 
         Integer[] new_customers = new Integer[16];
-        Integer[] customers_in_store = new Integer[32];
+        Integer[] customers_in_store = new Integer[16];
         Arrays.fill(new_customers, 0);
         Arrays.fill(customers_in_store, 0);
 
