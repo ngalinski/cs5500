@@ -374,7 +374,7 @@
       <workItem from="1592610572624" duration="79000" />
       <workItem from="1592610679720" duration="5783000" />
       <workItem from="1592945833178" duration="17865000" />
-      <workItem from="1592972330131" duration="27859000" />
+      <workItem from="1592972330131" duration="28192000" />
     </task>
     <task id="LOCAL-00001" summary="Finished with user inputs,&#10;Working on Javadocs">
       <created>1591774280766</created>
@@ -411,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592976926226</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Code looks cleaner, pulling from JSON &#10;If it doesn't work pull the old version">
+      <created>1593046979496</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1593046979496</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +431,8 @@
     <MESSAGE value="Added Javadocs, works with pushing data to mySQL" />
     <MESSAGE value="Added parameter evaluation" />
     <MESSAGE value="UML Added" />
-    <option name="LAST_COMMIT_MESSAGE" value="UML Added" />
+    <MESSAGE value="Code looks cleaner, pulling from JSON &#10;If it doesn't work pull the old version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code looks cleaner, pulling from JSON &#10;If it doesn't work pull the old version" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="161" key="#Plugins" timestamp="1593034538031">
@@ -459,10 +467,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593039756274" />
-    <state x="2447" y="94" key="CommitChangelistDialog2" timestamp="1592976921257">
-      <screen x="1920" y="0" width="2048" height="1112" />
+    <state x="494" y="88" key="CommitChangelistDialog2" timestamp="1593046973500">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="494" y="88" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1592962628249" />
+    <state x="494" y="88" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593046973500" />
     <state x="2447" y="94" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1592976921257" />
     <state x="2709" y="294" key="FileChooserDialogImpl" timestamp="1592973954148">
       <screen x="1920" y="0" width="2048" height="1112" />
