@@ -1,226 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8a63912-9c9a-4ea8-b7ac-be48460402c4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WEDNESDAY.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parameters.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Json_reader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Multipliers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Single_shopper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/ParametersTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClassDiagrams.uml" beforeDir="false" afterPath="$PROJECT_DIR$/ClassDiagrams.uml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/graph_htmls/graphlist.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/Xdonut.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/circlepack.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/dependency.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/donut.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/donutcharts.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/donutchartssimple.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/graphs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/metricdescriptions.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/notifications.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/lbd/template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/metricchartmethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/metricchartpackage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/metricchartx.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/modeldata/defaultclassmetrics.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/modeldata/overview_metric_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/modeldata/packagedependency.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/modeldata/summary_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/modeldata/sunburst_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/modeldata/table_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/reportforprint.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/sunburst.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/htmlx/treemap.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/html_report_supermarket_java/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/animate.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/demo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/helptip.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/light-bootstrap-dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/css/pe-icon-7-stroke.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/fonts/Pe-icon-7-stroke.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/fonts/Pe-icon-7-stroke.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/fonts/Pe-icon-7-stroke.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/fonts/Pe-icon-7-stroke.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/codemr-icon-black-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/codemr-white-32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/default-avatar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/loading-bubbles.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/mask.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/new_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/img/sidebar-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/bootstrap-checkbox-radio-switch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/bootstrap-notify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/bootstrap-select.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/chartist.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/demo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/jquery-1.10.2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/js/light-bootstrap-dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_alerts.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_cards.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_chartist.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_checkbox-radio-switch.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_dropdown.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_footers.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_inputs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_misc.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_navbars.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_responsive.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_sidebar-and-main-panel.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_tables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_typography.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_cards.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_chartist.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_inputs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_labels.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_morphing-buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_navbars.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_social-buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_tabs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_transparency.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/lbd/mixins/_vendor-prefixes.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/assets/sass/light-bootstrap-dashboard.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/barchartstyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/graph.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/helptip.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/legend.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/treemap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/css/vis.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/animated.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/bordered-pulled.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/core.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/fixed-width.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/font-awesome.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/icons.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/larger.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/list.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/mixins.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/path.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/rotated-flipped.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/screen-reader.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/stacked.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/less/variables.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_animated.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_bordered-pulled.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_core.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_fixed-width.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_larger.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_list.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_path.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_rotated-flipped.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_screen-reader.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_stacked.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-awesome-4.7.0/scss/font-awesome.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/css/animation.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/css/codemr-codes.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/css/codemr-embedded.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/css/codemr-ie7-codes.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/css/codemr-ie7.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/css/codemr.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/demo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/font/codemr.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/font/codemr.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/font/codemr.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/font/codemr.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/font-codemr/font/codemr.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/roboto-v15-cyrillic-ext_vietnamese_latin_cyrillic_latin-ext_greek-ext_greek-300.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/roboto-v15-cyrillic-ext_vietnamese_latin_cyrillic_latin-ext_greek-ext_greek-300.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/roboto-v15-cyrillic-ext_vietnamese_latin_cyrillic_latin-ext_greek-ext_greek-700.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/roboto-v15-cyrillic-ext_vietnamese_latin_cyrillic_latin-ext_greek-ext_greek-700.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/roboto-v15-cyrillic-ext_vietnamese_latin_cyrillic_latin-ext_greek-ext_greek-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/roboto-v15-cyrillic-ext_vietnamese_latin_cyrillic_latin-ext_greek-ext_greek-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/fonts/robotofonts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/img/eqGraphlegend.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/img/help.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/circlepack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/d3.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/d3.tip.v0.6.3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/dependency_wheel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/donut3d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/eq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/metric_definitions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/metricchart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/sunburst.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/treemap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/vis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/vis_eq_cluster.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/html/js/vis_eq_graph_base.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/Xdonut.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/circlepack.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/dependency.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/donut.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/donutcharts.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/donutchartssimple.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/graphs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/metricdescriptions.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/notifications.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/lbd/template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/metricchartmethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/metricchartpackage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/metricchartx.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/modeldata/defaultclassmetrics.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/modeldata/overview_metric_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/modeldata/packagedependency.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/modeldata/summary_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/modeldata/sunburst_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/modeldata/table_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/reportforprint.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/sunburst.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/htmlx/treemap.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/main_report/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/html/workingsets.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/supermarket_java.mdl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/supermarket_java.qa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codemr/supermarket_java/supermarket_java.ws" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Holidays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Holidays.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SQL_helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SQL_helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shopper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Shopper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Stats_writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Stats_writer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Supermarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Supermarket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/supermarket_java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/supermarket_java.iml" afterDir="false" />
-    </list>
+    <list default="true" id="a8a63912-9c9a-4ea8-b7ac-be48460402c4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -374,7 +155,7 @@
       <workItem from="1592610572624" duration="79000" />
       <workItem from="1592610679720" duration="5783000" />
       <workItem from="1592945833178" duration="17865000" />
-      <workItem from="1592972330131" duration="28192000" />
+      <workItem from="1592972330131" duration="28301000" />
     </task>
     <task id="LOCAL-00001" summary="Finished with user inputs,&#10;Working on Javadocs">
       <created>1591774280766</created>
@@ -418,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593046979496</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Code looks cleaner, pulling from JSON &#10;If it doesn't work pull the old version">
+      <created>1593047026717</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593047026717</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,62 +255,62 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593039756274" />
-    <state x="494" y="88" key="CommitChangelistDialog2" timestamp="1593046973500">
+    <state x="494" y="88" key="CommitChangelistDialog2" timestamp="1593047024712">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="494" y="88" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593046973500" />
+    <state x="494" y="88" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047024712" />
     <state x="2447" y="94" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1592976921257" />
     <state x="2709" y="294" key="FileChooserDialogImpl" timestamp="1592973954148">
       <screen x="1920" y="0" width="2048" height="1112" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1592610831746" />
     <state x="2709" y="294" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1592973954148" />
-    <state width="1877" height="226" key="GridCell.Tab.0.bottom" timestamp="1593042296503">
+    <state width="1877" height="347" key="GridCell.Tab.0.bottom" timestamp="1593047088017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593042296503" />
+    <state width="1877" height="347" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088017" />
     <state width="2005" height="376" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381249" />
     <state width="1358" height="269" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1591845209103" />
-    <state width="1877" height="226" key="GridCell.Tab.0.center" timestamp="1593042296503">
+    <state width="1877" height="347" key="GridCell.Tab.0.center" timestamp="1593047088016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593042296503" />
+    <state width="1877" height="347" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088016" />
     <state width="2005" height="376" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381246" />
     <state width="1358" height="269" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1591845209103" />
-    <state width="1877" height="226" key="GridCell.Tab.0.left" timestamp="1593042296502">
+    <state width="1877" height="347" key="GridCell.Tab.0.left" timestamp="1593047088016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593042296502" />
+    <state width="1877" height="347" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088016" />
     <state width="2005" height="376" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381245" />
     <state width="1358" height="269" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1591845209102" />
-    <state width="1877" height="226" key="GridCell.Tab.0.right" timestamp="1593042296503">
+    <state width="1877" height="347" key="GridCell.Tab.0.right" timestamp="1593047088017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593042296503" />
+    <state width="1877" height="347" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088017" />
     <state width="2005" height="376" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381247" />
     <state width="1358" height="269" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1591845209103" />
-    <state width="1877" height="347" key="GridCell.Tab.1.bottom" timestamp="1593040845136">
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom" timestamp="1593047088017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593040845136" />
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088017" />
     <state width="2005" height="376" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381251" />
     <state width="1358" height="269" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1591845209104" />
-    <state width="1877" height="347" key="GridCell.Tab.1.center" timestamp="1593040845136">
+    <state width="1877" height="347" key="GridCell.Tab.1.center" timestamp="1593047088017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593040845136" />
+    <state width="1877" height="347" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088017" />
     <state width="2005" height="376" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381250" />
     <state width="1358" height="269" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1591845209104" />
-    <state width="1877" height="347" key="GridCell.Tab.1.left" timestamp="1593040845136">
+    <state width="1877" height="347" key="GridCell.Tab.1.left" timestamp="1593047088017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593040845136" />
+    <state width="1877" height="347" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088017" />
     <state width="2005" height="376" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381250" />
     <state width="1358" height="269" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1591845209104" />
-    <state width="1877" height="347" key="GridCell.Tab.1.right" timestamp="1593040845136">
+    <state width="1877" height="347" key="GridCell.Tab.1.right" timestamp="1593047088017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="347" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593040845136" />
+    <state width="1877" height="347" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047088017" />
     <state width="2005" height="376" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1593030381251" />
     <state width="1358" height="269" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1591845209104" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1593041590565">
@@ -533,10 +321,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593041584748" />
-    <state x="2509" y="271" key="Vcs.Push.Dialog.v2" timestamp="1592976927505">
-      <screen x="1920" y="0" width="2048" height="1112" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1593047081383">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1592962662514" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047081383" />
     <state x="2509" y="271" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1592976927505" />
     <state x="2738" y="405" key="com.codemr.intellij.extractors.ExtractModelDialog" timestamp="1593032094173">
       <screen x="1920" y="0" width="2048" height="1112" />
@@ -548,9 +336,10 @@
     </state>
     <state x="2509" y="404" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1592980519534" />
     <state x="414" y="342" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.1440.877@0.23.1440.877" timestamp="1591844784714" />
-    <state x="2754" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592973952406">
-      <screen x="1920" y="0" width="2048" height="1112" />
+    <state x="782" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593047058308">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="782" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.2048.1112@0.0.1920.1040" timestamp="1593047058308" />
     <state x="2754" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.2048.1112@1920.0.2048.1112" timestamp="1592973952406" />
     <state x="2615" y="193" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1592980505831">
       <screen x="1920" y="0" width="2048" height="1112" />
