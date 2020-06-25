@@ -1,1 +1,0 @@
-{"supermarket_java":{"name":"supermarket_java","packages":{"":{"packageName":"","isAll":false,"classes":["LSQL_helper","LSupermarket","LParameters","LStats_writer","LHolidays","LShopper"]}}}}
