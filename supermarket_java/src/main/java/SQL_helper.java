@@ -61,10 +61,11 @@ public class SQL_helper {
 
             // This creates the table with what we want inside
             String sql = "CREATE TABLE `" + name +
-                    "` (Time_entered DOUBLE DEFAULT 0 not NULL, " +
+                    "` (ID INT NOT NULL AUTO_INCREMENT, " +
+                    "Time_entered DOUBLE DEFAULT 0 not NULL, " +
                     " Time_spent DOUBLE DEFAULT 0 not NULL, " +
                     " Rush TINYTEXT not NULL, " +
-                    " Senior BOOLEAN not NULL)";
+                    " Senior BOOLEAN not NULL, PRIMARY KEY (ID))";
 
             // This pushes the sql into the mysql database server
             statement.executeUpdate(sql);

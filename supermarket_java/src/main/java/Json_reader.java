@@ -8,10 +8,9 @@ import org.json.simple.parser.ParseException;
 
 public class Json_reader {
 
-    private static HashMap<String, Double> parameters = new HashMap<>();
+    private static final HashMap<String, Double> parameters = new HashMap<>();
 
     public Json_reader(){
-        this.fillParameters();
         this.read_json();
     }
 
@@ -43,8 +42,7 @@ public class Json_reader {
     }
     
     private void read_json() {
-        Json_reader json_reader = new Json_reader();
-        json_reader.fillParameters();
+        this.fillParameters();
 
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
@@ -67,7 +65,5 @@ public class Json_reader {
             e.printStackTrace();
         }
     }
-
-
 
 }

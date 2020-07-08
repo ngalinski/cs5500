@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -54,10 +55,16 @@ public class Supermarket {
         FileWriter csvWriter = new FileWriter(date.getDayOfWeek() + ".csv");
         csvWriter.append("Time Entered (hr), Time Spend (min), Rushing, Senior\n");
 
+        SimpleDateFormat formatter= new SimpleDateFormat("' created on' MM-dd-yyyy HH:mm:ss");
+        Date right_now = new Date(System.currentTimeMillis());
+
         // These lines connect to mysql and create a new table for the date
         SQL_helper sql_connector = new SQL_helper();
-        String table_name = date.toString() + java.time.LocalTime.now();
+        String table_name = date.toString();
 
+
+        // These will create a parameter table in the mysql database
+        /*
         // Create parameters table
         sql_connector.writeParametersTable(table_name);
         String[] parameter_names = parameters.passNames();
@@ -66,15 +73,16 @@ public class Supermarket {
         for(int i = 0; i < parameter_names.length; i++){
             sql_connector.writeParameters(table_name, parameter_names[i], parameter_values[i]);
         }
+         */
 
         // Create shopper table
-        sql_connector.writeTable(table_name + parameters.getNaming());
+        sql_connector.writeTable(table_name + formatter.format(right_now));
 
         for(int i = 0; i < this.get_num_shoppers(date, day_nice); i++){
             Shopper shopper_here = this.generate_shopper(day_num, day_nice);
 
             // This line writes to mysql
-            sql_connector.writeData(table_name + parameters.getNaming(), shopper_here.toString());
+            sql_connector.writeData(table_name + formatter.format(right_now), shopper_here.toString());
 
             csvWriter.append(shopper_here.toString());
             csvWriter.append("\n");

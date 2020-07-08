@@ -7,10 +7,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="supermarket_java" />
+        <module name="JSONSimpleExamples" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="supermarket_java" target="8" />
+      <module name="json" target="8" />
+      <module name="Json_reader" target="8" />
+      <module name="JSONSimpleExamples" target="1.8" />
+      <module name="pom_rest_service" target="8" />
+      <module name="Postman" target="1.8" />
+      <module name="supermarket_java" target="1.8" />
+      <module name="untitled" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="JSONSimpleExamples" options="-parameters" />
+      <module name="Postman" options="-parameters" />
+      <module name="supermarket_java" options="-parameters" />
+    </option>
   </component>
 </project>
