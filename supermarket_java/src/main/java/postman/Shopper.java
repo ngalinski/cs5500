@@ -1,14 +1,12 @@
 package postman;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="july_07_2020_created_07_08_2020_18_58_54")
 public class Shopper {
 
-    private Integer id;
+    private Integer ID;
     private double time_entered;
     private double time_spent;
     private String rush;
@@ -18,7 +16,7 @@ public class Shopper {
     }
 
     public Shopper(Integer id, double time_entered, double time_spent, String rush, boolean senior) {
-        this.id = id;
+        this.ID = id;
         this.time_entered = time_entered;
         this.time_spent = time_spent;
         this.rush = rush;
@@ -28,11 +26,11 @@ public class Shopper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
-        return id;
+        return ID;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.ID = id;
     }
 
     public double getTime_entered() {

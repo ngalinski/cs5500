@@ -15,13 +15,13 @@ public class ShopperController {
     private ShopperService service;
 
     // RESTful API methods for Retrieval operations
-    @GetMapping("/products")
+    @GetMapping("/shopper")
     public List<Shopper> list() {
         return service.listAll();
     }
 
     // RESTful API method for Create operation
-    @GetMapping("/products/{id}")
+    @GetMapping("/shopper/{id}")
     public ResponseEntity<Shopper> get(@PathVariable Integer id) {
         try {
             Shopper shopper = service.get(id);
@@ -32,13 +32,13 @@ public class ShopperController {
     }
 
     // RESTful API method for Update operation
-    @PostMapping("/products")
+    @PostMapping("/shopper")
     public void add(@RequestBody Shopper shopper) {
         service.save(shopper);
     }
 
     // RESTful API method for Delete operation
-    @PutMapping("/products/{id}")
+    @PutMapping("/shopper/{id}")
     public ResponseEntity<?> update(@RequestBody Shopper shopper, @PathVariable Integer id) {
         try {
             Shopper existshopper = service.get(id);
@@ -49,7 +49,7 @@ public class ShopperController {
         }
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/shopper/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }

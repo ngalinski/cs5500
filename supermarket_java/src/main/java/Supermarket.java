@@ -1,6 +1,9 @@
+import postman.PostmanHelper;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -55,13 +58,14 @@ public class Supermarket {
         FileWriter csvWriter = new FileWriter(date.getDayOfWeek() + ".csv");
         csvWriter.append("Time Entered (hr), Time Spend (min), Rushing, Senior\n");
 
-        SimpleDateFormat formatter= new SimpleDateFormat("' created on' MM-dd-yyyy HH:mm:ss");
+        SimpleDateFormat formatter1 = new SimpleDateFormat("'_created_'MM_dd_yyyy_HH_mm_ss");
         Date right_now = new Date(System.currentTimeMillis());
+        String extension = formatter1.format(right_now);
 
         // These lines connect to mysql and create a new table for the date
         SQL_helper sql_connector = new SQL_helper();
-        String table_name = date.toString();
-
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("LLLL_dd_yyyy");
+        String table_name = date.format(formatter2);
 
         // These will create a parameter table in the mysql database
         /*
@@ -76,13 +80,13 @@ public class Supermarket {
          */
 
         // Create shopper table
-        sql_connector.writeTable(table_name + formatter.format(right_now));
+        sql_connector.writeTable(table_name + extension);
 
         for(int i = 0; i < this.get_num_shoppers(date, day_nice); i++){
             Shopper shopper_here = this.generate_shopper(day_num, day_nice);
 
             // This line writes to mysql
-            sql_connector.writeData(table_name + formatter.format(right_now), shopper_here.toString());
+            sql_connector.writeData(table_name + extension, shopper_here.toString());
 
             csvWriter.append(shopper_here.toString());
             csvWriter.append("\n");
