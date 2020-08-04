@@ -11,7 +11,6 @@ import java.util.*;
  */
 public class Supermarket {
 
-    private final Parameters parameters;
     private final Json_reader json_parameters = new Json_reader();
 
     private final Double[] STORE_HOURS = {json_parameters.getValue("STORE_OPEN"),
@@ -19,7 +18,6 @@ public class Supermarket {
     private final int[] AVG_SHOPPERS = {5000, 800, 1000, 1200, 900, 2500, 4000};
 
     public Supermarket(){
-        this.parameters = new Parameters();
     }
 
     /**

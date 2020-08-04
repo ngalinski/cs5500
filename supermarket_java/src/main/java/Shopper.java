@@ -13,10 +13,8 @@ import java.util.*;
  */
 public class Shopper {
 
-    private Json_reader json_parameters;
+    private final Json_reader json_parameters;
 
-    private Double[] LUNCH_TIMES;
-    private Double[] DINNER_TIMES;
     private Double[][] WEEKDAY_TIMES;
 
     private final Double[] STORE_HOURS = {0d, 15d};
@@ -25,7 +23,6 @@ public class Shopper {
     private double time_spent, time_entered;
     private boolean is_senior;
     private String rush;
-    private final Parameters parameters = new Parameters();
 
     /**
      * Shopper object has time entered, time spent
@@ -42,9 +39,9 @@ public class Shopper {
     }
 
     public void setTimes(){
-        LUNCH_TIMES = (new Double[] {json_parameters.getValue("LUNCH_START"),
+        Double[] LUNCH_TIMES = (new Double[]{json_parameters.getValue("LUNCH_START"),
                 json_parameters.getValue("LUNCH_END")});
-        DINNER_TIMES = (new Double[] {json_parameters.getValue("DINNER_START"),
+        Double[] DINNER_TIMES = (new Double[]{json_parameters.getValue("DINNER_START"),
                 json_parameters.getValue("DINNER_END")});
         WEEKDAY_TIMES = new Double[][] {{STORE_HOURS[0], LUNCH_TIMES[0]},
                 {LUNCH_TIMES[0], LUNCH_TIMES[1]}, {LUNCH_TIMES[1], DINNER_TIMES[0]},
@@ -56,11 +53,12 @@ public class Shopper {
      * Higher chance of being senior on tuesday
      */
     private void senior(){
-        if(this.day == parameters.getSENIOR_DAY()){
-            this.is_senior = Math.random() < parameters.getSENIOR_CHANCE_DISCOUNT_DAY();
+        if(this.day == json_parameters.getValue("SENIOR_DAY")){
+            double SENIOR_CHANCE_DISCOUNT_DAY = 0.40;
+            this.is_senior = Math.random() < SENIOR_CHANCE_DISCOUNT_DAY;
         }
         else{
-            this.is_senior = Math.random() < parameters.getSENIOR_CHANCE();
+            this.is_senior = Math.random() < json_parameters.getValue("SENIOR_CHANCE");
         }
     }
 
@@ -90,12 +88,14 @@ public class Shopper {
      * @return Double senior time
      */
     private double setTIme_entered_senior() {
-        if(this.day == parameters.getSENIOR_DAY() && Math.random() < parameters.getSENIOR_DISCOUNT_CHANCE()) {
-            return parameters.getSENIOR_DISCOUNT_TIME()[0] + Math.random() *
-                    (parameters.getSENIOR_DISCOUNT_TIME()[1] - parameters.getSENIOR_DISCOUNT_TIME()[0]);
+        if(this.day == json_parameters.getValue("SENIOR_DAY") &&
+                Math.random() < json_parameters.getValue("SENIOR_CHANCE")) {
+            return json_parameters.getValue("SENIOR_DISCOUNT_TIME_START") + Math.random() *
+                    (json_parameters.getValue("SENIOR_DISCOUNT_TIME_END") -
+                            json_parameters.getValue("SENIOR_DISCOUNT_TIME_START"));
         }
         else{
-            return Math.random() * parameters.getSENIOR_ENTER_TIME()[1];
+            return Math.random() * json_parameters.getValue("SENIOR_DISCOUNT_TIME_END");
         }
     }
 
@@ -128,12 +128,12 @@ public class Shopper {
      */
     private void setRush() {
         if(6 <= this.getTime_entered() && this.getTime_entered() <= 7
-                && Math.random() <= parameters.getRUSH_CHANCE()) {
+                && Math.random() <= json_parameters.getValue("RUSH_CHANCE")) {
             this.rush = "Lunch";
         }
 
         else if(11 <= this.getTime_entered() && this.getTime_entered() <= 12.5
-                && Math.random() <= parameters.getRUSH_CHANCE()){
+                && Math.random() <= json_parameters.getValue("RUSH_CHANCE")){
             this.rush = "Dinner";
         }
 
