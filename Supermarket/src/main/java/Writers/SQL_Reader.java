@@ -1,6 +1,7 @@
 package Writers;
 
 import Model.Shopper;
+import Model.Table;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -66,8 +67,6 @@ public class SQL_Reader {
             sql += " WHERE " + joined;
         }
 
-        System.out.println(sql);
-
         connect();
 
         Statement statement = jdbcConnection.createStatement();
@@ -89,6 +88,28 @@ public class SQL_Reader {
         disconnect();
 
         return listShopper;
+    }
+
+    public List<Table> listTables() throws SQLException {
+        List<Table> tableNames = new ArrayList<>();
+
+        String sql = "SHOW TABLES";
+
+        connect();
+
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while (resultSet.next()) {
+            Table table = new Table(resultSet.getString(1));
+            tableNames.add(table);
+        }
+
+        resultSet.close();
+        statement.close();
+        disconnect();
+
+        return tableNames;
     }
 
     private String time_entered(String before, String after){

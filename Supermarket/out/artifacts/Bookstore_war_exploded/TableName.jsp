@@ -6,10 +6,11 @@
     <title>Books Store Application</title>
 </head>
 <body>
-<h1>
-    Table Creation
-</h1>
 <div align="center">
+    <h1>
+        Table Query
+    </h1>
+
     <form action="setName" method="post">
         <table border="1" cellpadding="5">
             <tr>
@@ -61,6 +62,19 @@
             </tr>
         </table>
     </form>
+
+
+    <table border="1" cellpadding="5">
+        <caption><h2>List of Tables</h2></caption>
+        <tr>
+            <th>Table Names</th>
+        </tr>
+        <c:forEach var="table" items="${listTables}">
+        <tr>
+            <td><c:out value="${table.name}" /></td>
+        </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
 </html>

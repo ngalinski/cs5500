@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Shopper;
 import Model.Supermarket;
+import Model.Table;
 import Writers.SQL_Reader;
 
 import java.io.IOException;
@@ -59,11 +60,8 @@ public class Controller extends HttpServlet {
                 case"/setName":
                     setTableName(request, response);
                     break;
-                case"/name":
-                    showHomeForm(request, response);
-                    break;
                 default:
-                    listShopper(request, response);
+                    showHomeForm(request, response);
                     break;
             }
         } catch (Exception ex) {
@@ -73,10 +71,9 @@ public class Controller extends HttpServlet {
 
     private void listShopper(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        System.out.println(name);
         List<Shopper> listShopper = sql_reader.listAllShoppers(name, parameters);
-        System.out.println(listShopper.size());
         request.setAttribute("listShopper", listShopper);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("Home.jsp");
         dispatcher.forward(request, response);
     }
@@ -91,29 +88,27 @@ public class Controller extends HttpServlet {
             throws Exception {
 
         Integer month = Integer.parseInt(request.getParameter("month"));
-        System.out.println(month);
         Integer day = Integer.parseInt(request.getParameter("day"));
-        System.out.println(day);
-
         Integer year = Integer.parseInt(request.getParameter("year"));
-        System.out.println(year);
-
         Boolean weather = request.getParameter("weather").equals("y");
-        System.out.println(weather);
 
         Supermarket supermarket = new Supermarket();
         supermarket.creation(month, day, year, weather);
-        response.sendRedirect("list");
+        response.sendRedirect("TableName.jsp");
     }
 
     private void showHomeForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
+        List<Table> tableNames = sql_reader.listTables();
+        request.setAttribute("listTables", tableNames);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("TableName.jsp");
         dispatcher.forward(request, response);
     }
 
     private void setTableName(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
+
         name = request.getParameter("tableName");
 
         if(!request.getParameter("before").isEmpty()) {
@@ -139,13 +134,6 @@ public class Controller extends HttpServlet {
         if(!request.getParameter("senior").isEmpty()) {
             parameters[5] = request.getParameter("senior");
         }
-
-        System.out.println(parameters[0]);
-        System.out.println(parameters[1]);
-        System.out.println(parameters[2]);
-        System.out.println(parameters[3]);
-        System.out.println(parameters[4]);
-        System.out.println(parameters[5]);
 
         response.sendRedirect("list");
     }

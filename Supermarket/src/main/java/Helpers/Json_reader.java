@@ -51,7 +51,7 @@ public class Json_reader {
         JSONParser jsonParser = new JSONParser();
 
         try {
-            FileReader reader = new FileReader("parameters.json");
+            FileReader reader = new FileReader("D:/ALIGN/Year_2/Summer_2020/Software_Engineering/Supermarket/parameters.json");
             //Read JSON file
             JSONObject obj = (JSONObject) jsonParser.parse(reader);
             Set<String> keys = obj.keySet();

@@ -6,10 +6,10 @@
     <title>Books Store Application</title>
 </head>
 <body>
-<h1>
-    Table Query
-</h1>
 <div align="center">
+    <h1> Table Query </h1>
+    <h2><a href="http://localhost:8080/Bookstore_war_exploded/new">Create New Table</a></h2>
+
     <form action="setName" method="post">
         <table border="1" cellpadding="5">
             <tr>
@@ -49,7 +49,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Senior: </th>
+                <th>Senior (y/n): </th>
                 <td>
                     <input type="text" name="senior" size="45"/>
                 </td>
@@ -61,6 +61,19 @@
             </tr>
         </table>
     </form>
+
+
+    <table border="1" cellpadding="5">
+        <caption><h2>List of Tables</h2></caption>
+        <tr>
+            <th>Table Names</th>
+        </tr>
+        <c:forEach var="table" items="${listTables}">
+        <tr>
+            <td><c:out value="${table.name}" /></td>
+        </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
 </html>

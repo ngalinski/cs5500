@@ -22,7 +22,7 @@ public class SQL_helper {
     public void readDataBase() {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             connect = DriverManager.getConnection(url, user, pass);
 
@@ -50,7 +50,7 @@ public class SQL_helper {
         try {
 
             // This connects the code to the sql server
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(url, user, pass);
 
             statement = connect.createStatement();
@@ -87,7 +87,7 @@ public class SQL_helper {
         try {
 
             // This connects the code to the sql server
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(url, user, pass);
 
             statement = connect.createStatement();
@@ -116,7 +116,7 @@ public class SQL_helper {
     public void writeParameters(String sql_table, String parameter_name, String parameter_value) {
         try {
             // Connect to mysql database
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(url, user, pass);
             statement = connect.createStatement();
 
@@ -153,7 +153,7 @@ public class SQL_helper {
 
         try {
             // Connect to mysql database
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(url, user, pass);
             statement = connect.createStatement();
 
