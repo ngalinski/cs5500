@@ -11,11 +11,11 @@ Json parameter instructions.
 1. You can edit the following parameters.
 2. Each parameter much be followed in naming and all must be listed as doubles. 
 3. Below are the names and default values of parameters. 
-STORE_OPEN 0d
-STORE_CLOSE 15d
-NUM_SHOPPERS 0d
-SENIOR_DAY 2d
-SENIOR_CHANCE 0.16
+STORE_OPEN 0d  
+STORE_CLOSE 15d  
+NUM_SHOPPERS 0d  
+SENIOR_DAY 2d  
+SENIOR_CHANCE 0.16  
 LAST_SENIOR_IN_TIME 12d
 SENIOR_DISCOUNT_TIME_START 4d
 SENIOR_DISCOUNT_TIME_END 6d
