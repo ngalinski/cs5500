@@ -94,7 +94,7 @@ public class Controller extends HttpServlet {
 
         Supermarket supermarket = new Supermarket();
         supermarket.creation(month, day, year, weather);
-        response.sendRedirect("TableName.jsp");
+        response.sendRedirect("name");
     }
 
     private void showHomeForm(HttpServletRequest request, HttpServletResponse response)

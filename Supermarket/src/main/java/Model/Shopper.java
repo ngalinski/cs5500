@@ -50,13 +50,9 @@ public class Shopper {
         this.setRush();
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
     public void setTimes(){
         Double[] LUNCH_TIMES = (new Double[]{json_parameters.getValue("LUNCH_START"),
@@ -99,9 +95,7 @@ public class Shopper {
      * This is here in case shopper enters too late
      * @param time_entered Double time entered store
      */
-    public void setTime_entered(double time_entered){
-        this.time_entered = time_entered;
-    }
+    public void setTime_entered(double time_entered){ this.time_entered = time_entered; }
 
     /**
      * Setter for time entered if a senior
@@ -138,9 +132,7 @@ public class Shopper {
      * Setter for time spent in case shopper stays past closing
      * @param time_spent Double time spent in store
      */
-    public void setTime_spent(double time_spent) {
-        this.time_spent = time_spent;
-    }
+    public void setTime_spent(double time_spent) { this.time_spent = time_spent; }
 
     /**
      * Setter for rush type of shopper
@@ -161,42 +153,32 @@ public class Shopper {
             this.rush = "Senior";
         }
 
-        else{
-            this.rush = "Normal";
-        }
+        else{ this.rush = "Normal"; }
     }
 
     /**
      * Getter for whether senior
      * @return Boolean whether senior
      */
-    public boolean getIs_senior() {
-        return is_senior;
-    }
+    public boolean getIs_senior() { return is_senior; }
 
     /**
      * Getter for time spent
      * @return Double time spent
      */
-    public double getTime_spent() {
-        return time_spent;
-    }
+    public double getTime_spent() { return time_spent; }
 
     /**
      * Getter for time entered
      * @return Double time entered
      */
-    public double getTime_entered() {
-        return time_entered;
-    }
+    public double getTime_entered() { return time_entered; }
 
     /**
      * Getter for rush type
      * @return String rush type
      */
-    public String getRush() {
-        return rush;
-    }
+    public String getRush() { return rush; }
 
     /**
      * This will be used for entering data of shoppers

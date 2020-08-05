@@ -7,7 +7,7 @@
 <body>
     <div align="center">
         <h1>Shopper Management and Information</h1>
-        <h2>Scroll Down!</h2>
+        <h2><a href="http://localhost:8080/Bookstore_war_exploded/name">Table Statistics</a></h2>
     <table border="1" cellpadding="5">
         <caption><h2>List of Shoppers</h2></caption>
         <tr>

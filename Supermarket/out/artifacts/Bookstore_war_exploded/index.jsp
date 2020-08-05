@@ -18,9 +18,7 @@
     <h1>Hello!</h1>
 
     <h2><a href="http://localhost:8080/Bookstore_war_exploded/new">Create New Table</a></h2>
-    <h3><a href="http://localhost:8080/Bookstore_war_exploded/name">Table Statistics</a></h3>
-
-
+    <h2><a href="http://localhost:8080/Bookstore_war_exploded/name">Table Statistics</a></h2>
 
   </div>
   </body>

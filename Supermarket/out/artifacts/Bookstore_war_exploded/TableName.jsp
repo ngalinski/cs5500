@@ -7,9 +7,8 @@
 </head>
 <body>
 <div align="center">
-    <h1>
-        Table Query
-    </h1>
+    <h1> Table Query </h1>
+    <h2><a href="http://localhost:8080/Bookstore_war_exploded/new">Create New Table</a></h2>
 
     <form action="setName" method="post">
         <table border="1" cellpadding="5">
@@ -50,7 +49,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Senior: </th>
+                <th>Senior (y/n): </th>
                 <td>
                     <input type="text" name="senior" size="45"/>
                 </td>
